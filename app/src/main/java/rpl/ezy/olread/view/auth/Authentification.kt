@@ -1,30 +1,19 @@
-package rpl.ezy.olread.view
+package rpl.ezy.olread.view.auth
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import rpl.ezy.olread.MainActivity
-import rpl.ezy.olread.api.GetDataService
-import rpl.ezy.olread.api.RetrofitClientInstance
-import android.util.Log
-import android.util.Patterns
-import android.view.View
 import kotlinx.android.synthetic.main.activity_authentification.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import rpl.ezy.olread.R
 import rpl.ezy.olread.adapter.PagerAdapter
-import rpl.ezy.olread.response.ResponseLogin
-import rpl.ezy.olread.response.ResponseSignup
 import rpl.ezy.olread.utils.ConstantUtils.ADMIN
-import rpl.ezy.olread.utils.ConstantUtils.EMAIL
 import rpl.ezy.olread.utils.ConstantUtils.STATUS
 import rpl.ezy.olread.utils.ConstantUtils.USER
-import rpl.ezy.olread.utils.ConstantUtils.USERNAME
 import rpl.ezy.olread.utils.ConstantUtils.USER_ID
 import rpl.ezy.olread.utils.SharedPreferenceUtils
+import rpl.ezy.olread.view.admin.AdminActivity
+import rpl.ezy.olread.view.user.UserActivity
 
 
 class Authentification : AppCompatActivity() {
@@ -43,7 +32,7 @@ class Authentification : AppCompatActivity() {
                 return
             }
             if (sharedPreferences!!.getIntSharedPreferences(STATUS) == USER){
-                startActivity(Intent(this@Authentification, MainActivity::class.java))
+                startActivity(Intent(this@Authentification, UserActivity::class.java))
                 return
             }
         }
@@ -56,8 +45,5 @@ class Authentification : AppCompatActivity() {
         tab_auth.setupWithViewPager(pager_auth)
         pager_auth.setPagingEnabled(false)
     }
-
-
-
 
 }

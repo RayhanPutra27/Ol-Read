@@ -13,8 +13,10 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
         <activity android:name=".view.user.UserActivity"></activity>
+        <activity android:name=".view.RecipeDetailActivity"></activity>
+        <activity android:name=".view.admin.AdminActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".view.Authentification"
+        <activity android:name=".view.auth.Authentification"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
