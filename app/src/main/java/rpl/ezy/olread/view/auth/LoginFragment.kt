@@ -30,6 +30,7 @@ import rpl.ezy.olread.utils.ConstantUtils.USERNAME
 import rpl.ezy.olread.utils.ConstantUtils.USER_ID
 import rpl.ezy.olread.utils.SharedPreferenceUtils
 import rpl.ezy.olread.view.admin.AdminActivity
+import rpl.ezy.olread.view.user.UserActivity
 
 /**
  * A simple [Fragment] subclass.
@@ -101,7 +102,7 @@ class LoginFragment : Fragment() {
                     }
 
                     SetDataUser(STATUS, USER, "")
-                    startActivity(Intent(context, MainActivity::class.java))
+                    startActivity(Intent(context, UserActivity::class.java))
                     (context as Activity).finish()
                 } else {
                     Toast.makeText(
