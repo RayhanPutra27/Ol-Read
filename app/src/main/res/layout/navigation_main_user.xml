@@ -35,7 +35,7 @@
                 android:textStyle="bold"
                 android:gravity="center"
                 android:textColor="#FFFFFF"
-                android:fontFamily="@font/Lato-Bold"/>
+                android:fontFamily="@font/lato_bold"/>
 
         </LinearLayout>
 
@@ -57,7 +57,7 @@
                 android:textStyle="bold"
                 android:gravity="center"
                 android:textColor="#717171"
-                android:fontFamily="@font/Lato-Bold"/>
+                android:fontFamily="@font/lato_bold"/>
 
         </LinearLayout>
 
@@ -85,7 +85,7 @@
                     android:textStyle="bold"
                     android:gravity="center"
                     android:textColor="#FFFFFF"
-                    android:fontFamily="@font/Lato-Bold"/>
+                    android:fontFamily="@font/lato_bold"/>
 
             </LinearLayout>
 
@@ -107,7 +107,7 @@
                     android:textStyle="bold"
                     android:gravity="center"
                     android:textColor="#FFFFFF"
-                    android:fontFamily="@font/Lato-Bold"/>
+                    android:fontFamily="@font/lato_bold"/>
 
             </LinearLayout>
 

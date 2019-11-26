@@ -2,6 +2,7 @@ package rpl.ezy.olread.view.user
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import rpl.ezy.olread.R
 
 class UserActivity : AppCompatActivity() {
 

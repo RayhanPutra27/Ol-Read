@@ -57,7 +57,7 @@
                         android:text="Hallo"
                         android:textSize="24sp"
                         android:textStyle="bold"
-                        android:fontFamily="@font/Lato-Bold"/>
+                        android:fontFamily="@font/lato_bold"/>
 
                     <TextView
                         android:layout_marginStart="8dp"
@@ -67,7 +67,7 @@
                         android:text="User"
                         android:textStyle="bold"
                         android:textSize="24sp"
-                        android:fontFamily="@font/Lato-Bold"/>
+                        android:fontFamily="@font/lato_bold"/>
 
                 </LinearLayout>
 
@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:text="Apa yang ingin kamu masak hari ini?"
                     android:textSize="18sp"
-                    android:fontFamily="@font/Lato-Light"/>
+                    android:fontFamily="@font/lato_light"/>
 
             </LinearLayout>
 
@@ -94,7 +94,7 @@
                     android:layout_height="wrap_content"
                     android:text="Trending"
                     android:textSize="20sp"
-                    android:fontFamily="@font/Lato-Light"/>
+                    android:fontFamily="@font/lato_light"/>
 
                 <TextView
                     android:id="@+id/txt_search"
@@ -103,7 +103,7 @@
                     android:text="Search"
                     android:gravity="right"
                     android:textSize="20sp"
-                    android:fontFamily="@font/Lato-Light"/>
+                    android:fontFamily="@font/lato_light"/>
 
             </LinearLayout>
 
@@ -122,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:text="Category"
                 android:textSize="20sp"
-                android:fontFamily="@font/Lato-Light"/>
+                android:fontFamily="@font/lato_light"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_marginTop="8dp"
@@ -139,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:text="Our Menu"
                 android:textSize="20sp"
-                android:fontFamily="@font/Lato-Light"/>
+                android:fontFamily="@font/lato_light"/>
 
             <RelativeLayout
                 android:layout_marginTop="16dp"
