@@ -16,7 +16,9 @@ import retrofit2.Response
 import rpl.ezy.olread.R
 import rpl.ezy.olread.response.ResponseLogin
 import rpl.ezy.olread.response.ResponseSignup
+import rpl.ezy.olread.utils.ConstantUtils.ADMIN
 import rpl.ezy.olread.utils.ConstantUtils.EMAIL
+import rpl.ezy.olread.utils.ConstantUtils.STATUS
 import rpl.ezy.olread.utils.ConstantUtils.USER
 import rpl.ezy.olread.utils.ConstantUtils.USERNAME
 import rpl.ezy.olread.utils.ConstantUtils.USER_ID
@@ -34,8 +36,14 @@ class Authentification : AppCompatActivity() {
         sharedPreferences = SharedPreferenceUtils(this@Authentification)
 
         if (sharedPreferences!!.getIntSharedPreferences(USER_ID) != -1){
-            startActivity(Intent(this@Authentification, MainActivity::class.java))
-            return
+            if (sharedPreferences!!.getIntSharedPreferences(STATUS) == ADMIN){
+                startActivity(Intent(this@Authentification, AdminActivity::class.java))
+                return
+            }
+            if (sharedPreferences!!.getIntSharedPreferences(STATUS) == USER){
+                startActivity(Intent(this@Authentification, MainActivity::class.java))
+                return
+            }
         }
 
         bt_login.setOnClickListener {
@@ -134,6 +142,14 @@ class Authentification : AppCompatActivity() {
                     SetDataUser(USERNAME, 0, data.username)
                     SetDataUser(EMAIL, 0, data.email)
 
+                    if (data.status == ADMIN){
+                        SetDataUser(STATUS, ADMIN, "")
+                        startActivity(Intent(this@Authentification, AdminActivity::class.java))
+                        finish()
+                        return
+                    }
+
+                    SetDataUser(STATUS, USER, "")
                     startActivity(Intent(this@Authentification, MainActivity::class.java))
                     finish()
                 } else {
@@ -175,6 +191,7 @@ class Authentification : AppCompatActivity() {
                     SetDataUser(USER_ID, data.user_id, "")
                     SetDataUser(USERNAME, 0, data.username)
                     SetDataUser(EMAIL, 0, data.email)
+                    SetDataUser(STATUS, USER, "")
 
                     startActivity(Intent(this@Authentification, MainActivity::class.java))
                     finish()
