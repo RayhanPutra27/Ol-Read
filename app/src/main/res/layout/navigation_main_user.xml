@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:background="#8AA27D">
+
+    <ImageView
+        android:id="@+id/profile"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/custom_item_category"/>
+
+    <RelativeLayout
+        android:layout_above="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="NotSibling">
+        
+        <LinearLayout
+            android:id="@+id/btn_favorite"
+            android:layout_centerInParent="true"
+            android:layout_width="160dp"
+            android:layout_height="80dp"
+            android:background="@drawable/custom_shape"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Favorite"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/Lato-Bold"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_history"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp"
+            android:layout_below="@+id/btn_favorite"
+            android:layout_centerInParent="true"
+            android:layout_width="160dp"
+            android:layout_height="80dp"
+            android:background="@drawable/custom_history">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="History"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="#717171"
+                android:fontFamily="@font/Lato-Bold"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/bottom"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_alignParentLeft="true"
+                android:id="@+id/btn_logout"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/custom_shape"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Logout"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="#FFFFFF"
+                    android:fontFamily="@font/Lato-Bold"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_alignParentRight="true"
+                android:id="@+id/btn_archive"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/custom_shape"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Archive"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="#FFFFFF"
+                    android:fontFamily="@font/Lato-Bold"/>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+        
+    </RelativeLayout>
+
+</RelativeLayout>
