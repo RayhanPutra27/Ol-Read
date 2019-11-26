@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.user.SearchActivity"
+    tools:ignore="UnusedAttribute,ContentDescription,RtlHardcoded">
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F6F6F6"
+            android:paddingTop="16dp"
+            android:paddingHorizontal="16dp">
+
+            <RelativeLayout
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:layout_width="42dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/nav" />
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/custom_item_category"
+                    android:layout_alignParentRight="true"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_marginTop="16dp"
+                android:layout_below="@+id/header"
+                android:id="@+id/view_search"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingHorizontal="16dp"
+                android:background="@drawable/custom_item_category">
+
+                <EditText
+                    android:id="@+id/txt_search"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:hint="Search"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/lato_bold"
+                    android:background="@drawable/custom_item_category"
+                    android:textColor="#000"
+                    android:textSize="18sp"/>
+
+                <ImageView
+                    android:id="@+id/search"
+                    android:layout_gravity="center"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/search"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="16dp"
+                android:layout_below="@+id/view_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="16dp"
+                android:background="@drawable/custom_item_horizontal">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recycler_menu"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigation_view"
+            style="@style/Widget.MaterialComponents.NavigationView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start">
+
+            <include
+                layout="@layout/navigation_main_user">
+            </include>
+
+        </com.google.android.material.navigation.NavigationView>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+</RelativeLayout>
