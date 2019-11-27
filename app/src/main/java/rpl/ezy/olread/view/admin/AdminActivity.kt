@@ -39,11 +39,6 @@ class AdminActivity : AppCompatActivity() {
     }
 
     fun AcceptedRecipe(){
-        Toast.makeText(
-            this@AdminActivity,
-            "Resume",
-            Toast.LENGTH_SHORT
-        ).show()
         val service =
             RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
         val call = service.getAcceptedRecipe()

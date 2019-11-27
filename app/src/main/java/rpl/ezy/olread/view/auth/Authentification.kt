@@ -29,10 +29,12 @@ class Authentification : AppCompatActivity() {
         if (sharedPreferences!!.getIntSharedPreferences(USER_ID) != -1){
             if (sharedPreferences!!.getIntSharedPreferences(STATUS) == ADMIN){
                 startActivity(Intent(this@Authentification, AdminActivity::class.java))
+                finish()
                 return
             }
             if (sharedPreferences!!.getIntSharedPreferences(STATUS) == USER){
                 startActivity(Intent(this@Authentification, UserActivity::class.java))
+                finish()
                 return
             }
         }

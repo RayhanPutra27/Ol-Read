@@ -16,10 +16,10 @@ import rpl.ezy.olread.model.MRecipe
 import rpl.ezy.olread.utils.ConstantUtils
 import rpl.ezy.olread.view.RecipeDetailActivity
 
-class RecyclerUnAcceptedRecipesAdapter(var mContext: Context, var data: ArrayList<MRecipe>): RecyclerView.Adapter<RecyclerUnAcceptedRecipesAdapter.ViewHolder>() {
+class AcceptedRecipesAdapter(var mContext: Context, var data: ArrayList<MRecipe>): RecyclerView.Adapter<AcceptedRecipesAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_recipe_horizontal, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_recipe_vertical, parent, false)
         return ViewHolder(v)
     }
 
@@ -37,10 +37,12 @@ class RecyclerUnAcceptedRecipesAdapter(var mContext: Context, var data: ArrayLis
                 Intent(mContext, RecipeDetailActivity::class.java)
                     .putExtra(ConstantUtils.RECIPE_ID, data[position].recipe_id))
         }
+
     }
 
-    inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+    inner class ViewHolder(v: View): RecyclerView.ViewHolder(v){
         var img_item = v.findViewById(R.id.img_item) as ImageView
         var tv_title = v.findViewById(R.id.tv_title) as TextView
     }
+
 }

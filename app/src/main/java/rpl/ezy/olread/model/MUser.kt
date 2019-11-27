@@ -5,5 +5,6 @@ class MUser(
     var username : String,
     var email : String,
     var password : String,
+    var profil : String,
     var status : Int
 )
