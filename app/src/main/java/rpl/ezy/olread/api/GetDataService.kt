@@ -38,4 +38,7 @@ interface GetDataService {
 
     @PUT("/recipes/confirm/{recipes_id}")
     fun confirmRecipes(@Path("recipes_id") recipe_id: Int): Call<ResponseRecipes>
+
+    @GET("/recipes/kategori")
+    fun getCategory(): Call<ResponseRecipes>
 }

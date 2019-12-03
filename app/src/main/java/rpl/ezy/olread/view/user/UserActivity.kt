@@ -15,10 +15,12 @@ import retrofit2.Callback
 import retrofit2.Response
 import rpl.ezy.olread.R
 import rpl.ezy.olread.adapter.AcceptedRecipesAdapter
+import rpl.ezy.olread.adapter.CategoryAdapter
 import rpl.ezy.olread.adapter.RecyclerAcceptedRecipesAdapter
 import rpl.ezy.olread.api.GetDataService
 import rpl.ezy.olread.api.RetrofitClientInstance
 import rpl.ezy.olread.model.MUser
+import rpl.ezy.olread.response.ResponseCategory
 import rpl.ezy.olread.response.ResponseRecipes
 import rpl.ezy.olread.response.ResponseUsers
 import rpl.ezy.olread.utils.ConstantUtils
@@ -38,6 +40,7 @@ class UserActivity : AppCompatActivity() {
         responseDataUser()
 
         setRecyclerMenu()
+        setRecyclerCategory()
 
         bt_logout.setOnClickListener {
             actionLogout()
@@ -81,6 +84,34 @@ class UserActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    fun setRecyclerCategory() {
+        val service = RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
+        val call = service.getCategory()
+        call.enqueue(object : Callback<ResponseRecipes>{
+            override fun onFailure(call: Call<ResponseRecipes>, t: Throwable) {
+                Toast.makeText(
+                    this@UserActivity,
+                    "Something went wrong...Please try later!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.d("LOGLOGAN", "${t.message}")
+            }
+
+            override fun onResponse(call: Call<ResponseRecipes>,response: Response<ResponseRecipes>) {
+                if(response.body()!!.status == 200) {
+                    var data = response.body()!!.data
+                    var mAdapter = CategoryAdapter(this@UserActivity, data)
+                    recycler_category.apply {
+                        layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.HORIZONTAL, false)
+                        adapter = mAdapter
+                    }
+                }
+            }
+
+        })
+
     }
 
     fun responseDataUser() {
