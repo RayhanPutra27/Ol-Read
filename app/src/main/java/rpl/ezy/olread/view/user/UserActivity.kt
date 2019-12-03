@@ -77,12 +77,12 @@ class UserActivity : AppCompatActivity() {
                 if (response.body()!!.status == 200){
                     var data = response.body()!!.data
 
-//                    var mAdapter = AcceptedRecipesAdapter(this@UserActivity, data)
-//
-//                    recycler_menu.apply {
-//                        layoutManager = LinearLayoutManager(this@UserActivity)
-//                        adapter = mAdapter
-//                    }
+                    var mAdapter = AcceptedRecipesAdapter(this@UserActivity, data)
+
+                    recycler_menu.apply {
+                        layoutManager = LinearLayoutManager(this@UserActivity)
+                        adapter = mAdapter
+                    }
 
                 }
             }

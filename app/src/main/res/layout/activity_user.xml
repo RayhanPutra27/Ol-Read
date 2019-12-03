@@ -16,7 +16,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#F6F6F6"
+            android:background="#ECECEC"
             android:paddingTop="16dp"
             android:paddingHorizontal="16dp">
 

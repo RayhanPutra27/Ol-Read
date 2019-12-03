@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="100dp"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="125dp"
     android:layout_height="160dp"
-    android:layout_marginRight="8dp">
+    android:layout_marginEnd="8dp">
 
     <ImageView
         android:id="@+id/img_item"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="#EBEBEB"
+        android:layout_width="125dp"
+        android:layout_height="160dp"
+        android:background="@drawable/custom_item_horizontal"
         android:scaleType="centerCrop"
         android:adjustViewBounds="true"/>
 
@@ -16,11 +18,13 @@
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="title asd as dasd aas d"
+        android:text="Nasi Goreng"
         android:maxLines="2"
+        android:gravity="center"
         android:ellipsize="end"
         android:textSize="20sp"
+        android:textColor="#FFFFFF"
         android:textStyle="bold"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="-28dp"/>
 
 </LinearLayout>
