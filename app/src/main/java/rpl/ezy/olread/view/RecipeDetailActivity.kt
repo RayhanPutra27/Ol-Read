@@ -13,6 +13,8 @@ import retrofit2.Response
 import rpl.ezy.olread.R
 import rpl.ezy.olread.api.GetDataService
 import rpl.ezy.olread.api.RetrofitClientInstance
+import rpl.ezy.olread.model.MRecipe
+import rpl.ezy.olread.response.ResponseArchive
 import rpl.ezy.olread.response.ResponseRecipeById
 import rpl.ezy.olread.response.ResponseRecipes
 import rpl.ezy.olread.utils.ConstantUtils
@@ -24,10 +26,13 @@ import rpl.ezy.olread.utils.SharedPreferenceUtils
 
 class RecipeDetailActivity : AppCompatActivity() {
 
+    var sharedPref: SharedPreferenceUtils? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe_detail)
 
+        sharedPref = SharedPreferenceUtils(this@RecipeDetailActivity)
         if (intent != null) {
             setData(intent.getIntExtra(RECIPE_ID, 0))
             Toast.makeText(
@@ -75,6 +80,9 @@ class RecipeDetailActivity : AppCompatActivity() {
                 bt_confirm.setOnClickListener {
                     ConfirmRecipe(recipe_id)
                 }
+
+                getArchive(dataRecipe)
+
             }
         })
     }
@@ -101,6 +109,34 @@ class RecipeDetailActivity : AppCompatActivity() {
                 finish()
             }
 
+        })
+    }
+
+    private fun getArchive(dataRecipe: MRecipe) {
+        val service =
+            RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
+        val call = service.getArchive(sharedPref!!.getIntSharedPreferences(ConstantUtils.USER_ID))
+        call.enqueue(object : Callback<ResponseArchive> {
+            override fun onFailure(call: Call<ResponseArchive>, t: Throwable) {
+                Toast.makeText(
+                    this@RecipeDetailActivity,
+                    "Something went wrong...Please try later!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.d("LOGLOGAN", "${t.message}")
+            }
+
+            override fun onResponse(
+                call: Call<ResponseArchive>,
+                response: Response<ResponseArchive>
+            ) {
+                var data = response.body()!!.data
+                for (i in 0 until data.size) {
+                    if (data[i].recipe_id == dataRecipe.recipe_id){
+                        img_archive.setImageResource(R.drawable.bookmark_black)
+                    }
+                }
+            }
         })
     }
 
