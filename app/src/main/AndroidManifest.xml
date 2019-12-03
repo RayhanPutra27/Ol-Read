@@ -12,9 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.user.ProfileActivity"></activity>
+        <activity android:name=".view.user.CategoryActivity"></activity>
+        <activity android:name=".view.user.ProfileActivity" />
         <activity android:name=".view.user.HistoryActivity" />
         <activity android:name=".view.user.ArchiveActivity" />
+        <activity android:name=".view.user.SearchActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity android:name=".view.user.FavoriteActivity" />
         <activity android:name=".view.user.UserActivity" />
         <activity android:name=".view.RecipeDetailActivity" />

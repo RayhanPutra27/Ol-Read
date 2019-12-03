@@ -6,7 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_category.*
-import kotlinx.android.synthetic.main.activity_search.*
+import kotlinx.android.synthetic.main.activity_user.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -15,26 +15,32 @@ import rpl.ezy.olread.adapter.AcceptedRecipesAdapter
 import rpl.ezy.olread.api.GetDataService
 import rpl.ezy.olread.api.RetrofitClientInstance
 import rpl.ezy.olread.response.ResponseRecipes
+import rpl.ezy.olread.utils.ConstantUtils.KATEGORI
 
-class SearchActivity : AppCompatActivity() {
+class CategoryActivity : AppCompatActivity() {
+
+    var kategori: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
+        setContentView(R.layout.activity_category)
 
-        search.setOnClickListener {
-            setRecyclerMenu(txt_search.text.toString())
+        if(intent != null) {
+            kategori = intent.getStringExtra(KATEGORI)
         }
+
+        setRecyclerMenu()
+
     }
 
-    fun setRecyclerMenu(title: String){
+    fun setRecyclerMenu(){
         val service =
             RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
-        val call = service.getSearch(title)
+        val call = service.getSelectCategory(kategori!!)
         call.enqueue(object : Callback<ResponseRecipes> {
             override fun onFailure(call: Call<ResponseRecipes>, t: Throwable) {
                 Toast.makeText(
-                    this@SearchActivity,
+                    this@CategoryActivity,
                     "Something went wrong...Please try later!",
                     Toast.LENGTH_SHORT
                 ).show()
@@ -45,10 +51,10 @@ class SearchActivity : AppCompatActivity() {
                 if (response.body()!!.status == 200){
                     var data = response.body()!!.data
 
-                    var mAdapter = AcceptedRecipesAdapter(this@SearchActivity, data)
+                    var mAdapter = AcceptedRecipesAdapter(this@CategoryActivity, data)
 
-                    recycler_menu.apply {
-                        layoutManager = LinearLayoutManager(this@SearchActivity)
+                    recycler_kategori.apply {
+                        layoutManager = LinearLayoutManager(this@CategoryActivity)
                         adapter = mAdapter
                     }
 
