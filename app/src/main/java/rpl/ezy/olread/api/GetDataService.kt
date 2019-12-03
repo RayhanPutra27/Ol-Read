@@ -30,6 +30,9 @@ interface GetDataService {
     @GET("/recipes/accepted")
     fun getAcceptedRecipe(): Call<ResponseRecipes>
 
+    @GET("/recipes/kategori/{kategori}")
+    fun getSelectCategory(@Path("kategori") kategori: String): Call<ResponseRecipes>
+
     @GET("/recipes/unaccepted")
     fun getUnAcceptedRecipe(): Call<ResponseRecipes>
 
@@ -41,6 +44,9 @@ interface GetDataService {
 
     @GET("/recipes/kategori")
     fun getCategory(): Call<ResponseRecipes>
+
+    @GET("/recipes/search/{title}")
+    fun getSearch(@Path("title") title: String): Call<ResponseRecipes>
 
     @GET("/recipes/archive/{user_id}")
     fun getArchive(@Path("user_id") user_id: Int): Call<ResponseArchive>

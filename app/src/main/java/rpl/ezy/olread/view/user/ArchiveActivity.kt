@@ -23,25 +23,11 @@ class ArchiveActivity : AppCompatActivity() {
 
     var sharedPref: SharedPreferenceUtils? = null
     private var dataRecipes: ArrayList<MRecipe>? = ArrayList()
-    //    var dataRecipes: ArrayList<String>? = ArrayList()
     var position = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_archive)
-//        var arra = arrayOf("TES", "TESLAH", "TESTES")
-//
-//        for (i in 0 until arra.size){
-//            dataRecipes!!.add(i, arra[i])
-//        }
-//
-//        var mAdapter = AcceptedRecipesAdapter(this@ArchiveActivity, dataRecipes!!)
-//
-//        recycler_archive.apply {
-//            layoutManager = LinearLayoutManager(this@ArchiveActivity)
-//            adapter = mAdapter
-//        }
-
         sharedPref = SharedPreferenceUtils(this@ArchiveActivity)
 
         getArchive()

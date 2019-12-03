@@ -33,6 +33,8 @@ class AcceptedRecipesAdapter(var mContext: Context, var data: ArrayList<MRecipe>
             .transform(RoundedCorners(8))
             .into(holder.img_item)
         holder.tv_title.text = data[position].title
+        holder.tv_kategori.text = data[position].kategori
+
         Log.d("TES_RECIPES", "${data[position].recipe}")
 
         holder.itemView.setOnClickListener {
@@ -46,6 +48,7 @@ class AcceptedRecipesAdapter(var mContext: Context, var data: ArrayList<MRecipe>
     inner class ViewHolder(v: View): RecyclerView.ViewHolder(v){
         var img_item = v.findViewById(R.id.img_item) as ImageView
         var tv_title = v.findViewById(R.id.tv_title) as TextView
+        var tv_kategori = v.findViewById(R.id.tv_kategori) as TextView
     }
 
 }

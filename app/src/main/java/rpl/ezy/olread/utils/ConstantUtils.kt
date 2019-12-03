@@ -19,5 +19,6 @@ object ConstantUtils {
     const val RECIPE = "recipe"
     const val IMG_URL = "img_url"
     const val ISACCEPT = "isaccept"
+    const val KATEGORI = "kategori"
 
 }

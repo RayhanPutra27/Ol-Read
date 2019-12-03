@@ -46,6 +46,10 @@ class UserActivity : AppCompatActivity() {
             actionLogout()
         }
 
+        txt_search.setOnClickListener {
+            startActivity(Intent(this, SearchActivity::class.java))
+        }
+
         btn_archive.setOnClickListener {
             startActivity(Intent(this@UserActivity, ArchiveActivity::class.java))
         }
