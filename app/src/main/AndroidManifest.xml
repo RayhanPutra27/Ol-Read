@@ -12,24 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".view.user.ArchiveActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
-        <activity
-            android:name=".view.user.UserActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".view.RecipeDetailActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".view.admin.AdminActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".view.auth.Authentification"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".view.user.ArchiveActivity"></activity>
+        <activity android:name=".view.user.SearchActivity" />
+        <activity android:name=".view.user.CategoryActivity" />
+        <activity android:name=".view.user.ProfileActivity" />
+        <activity android:name=".view.user.HistoryActivity" />
+        <activity android:name=".view.user.FavoriteActivity" />
+        <activity android:name=".view.user.UserActivity" />
+        <activity android:name=".view.RecipeDetailActivity" />
+        <activity android:name=".view.admin.AdminActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".view.auth.Authentification">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

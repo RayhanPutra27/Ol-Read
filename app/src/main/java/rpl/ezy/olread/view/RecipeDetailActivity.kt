@@ -64,7 +64,7 @@ class RecipeDetailActivity : AppCompatActivity() {
 
                 if (dataRecipe.isAccept == ConstantUtils.ACCEPTED){
                     view_button.visibility = View.GONE
-                    tv_recipe.setPadding(0,0,0,70)
+//                    tv_recipe.setPadding(0,0,0,70)
                 } else {
                     view_button.visibility = View.VISIBLE
                     img_archive.visibility = View.GONE

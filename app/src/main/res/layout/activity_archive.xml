@@ -1,18 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
-    android:background="#EEECEC"
-    tools:context=".view.user.ArchiveActivity">
+    tools:context=".view.user.UserActivity"
+    tools:ignore="UnusedAttribute,ContentDescription,RtlHardcoded">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_archive"
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_recipe_vertical"/>
+        android:fitsSystemWindows="true">
 
-</LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ECECEC"
+            android:paddingTop="16dp"
+            android:paddingHorizontal="16dp">
+
+            <RelativeLayout
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:layout_width="42dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/nav" />
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/custom_item_category"
+                    android:layout_alignParentRight="true"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_marginTop="16dp"
+                android:id="@+id/text_header"
+                android:layout_below="@+id/header"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hallo"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/lato_bold"/>
+
+                    <TextView
+                        android:layout_marginStart="8dp"
+                        android:id="@+id/txt_user"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="User"
+                        android:textStyle="bold"
+                        android:textSize="24sp"
+                        android:fontFamily="@font/lato_bold"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ini adalah Archive masakanmu !"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/lato_light"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="16dp"
+                android:layout_below="@+id/text_header"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="16dp"
+                android:background="@drawable/custom_item_horizontal">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recycler_archive"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+</RelativeLayout>
