@@ -96,7 +96,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_below="@+id/txt_menu"
                 android:layout_width="match_parent"
-                android:layout_height="360dp"
+                android:layout_height="match_parent"
                 android:paddingHorizontal="16dp"
                 android:paddingTop="16dp"
                 android:background="@drawable/custom_item_horizontal">
