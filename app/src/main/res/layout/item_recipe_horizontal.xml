@@ -20,6 +20,7 @@
         android:layout_height="match_parent"
         android:text="Nasi Goreng"
         android:maxLines="2"
+        android:gravity="center"
         android:ellipsize="end"
         android:textSize="20sp"
         android:textColor="#FFFFFF"

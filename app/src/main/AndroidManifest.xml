@@ -10,17 +10,18 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".view.user.UserActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
-        <activity android:name=".view.RecipeDetailActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
-        <activity android:name=".view.admin.AdminActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
-        <activity android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
-        <activity android:name=".view.auth.Authentification"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".view.user.ProfileActivity"></activity>
+        <activity android:name=".view.user.HistoryActivity" />
+        <activity android:name=".view.user.ArchiveActivity" />
+        <activity android:name=".view.user.FavoriteActivity" />
+        <activity android:name=".view.user.UserActivity" />
+        <activity android:name=".view.RecipeDetailActivity" />
+        <activity android:name=".view.admin.AdminActivity" />
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".view.auth.Authentification"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
