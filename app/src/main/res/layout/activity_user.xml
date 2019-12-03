@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.user.UserActivity"
     tools:ignore="UnusedAttribute,ContentDescription,RtlHardcoded">
 
@@ -25,137 +26,162 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
+                    android:id="@+id/img_navbar"
                     android:layout_centerVertical="true"
                     android:layout_width="42dp"
                     android:layout_height="32dp"
                     android:src="@drawable/nav" />
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img_profile"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:background="@drawable/custom_item_category"
+                    app:civ_border_color="#FFFFFF"
+                    app:civ_border_width="1dp"
                     android:layout_alignParentRight="true"/>
 
             </RelativeLayout>
 
-            <LinearLayout
-                android:layout_marginTop="16dp"
-                android:id="@+id/text_header"
+            <androidx.core.widget.NestedScrollView
                 android:layout_below="@+id/header"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hallo"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/lato_bold"/>
+                    <LinearLayout
+                        android:layout_marginTop="16dp"
+                        android:id="@+id/text_header"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_marginStart="8dp"
-                        android:id="@+id/txt_user"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Hallo"
+                                android:textSize="24sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/lato_bold"/>
+
+                            <TextView
+                                android:layout_marginStart="8dp"
+                                android:id="@+id/txt_user"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="User"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:textSize="24sp"
+                                android:fontFamily="@font/lato_bold"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:text="Apa yang ingin kamu masak hari ini?"
+                            android:textSize="18sp"
+                            android:fontFamily="@font/lato_light"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_below="@+id/text_header"
+                        android:id="@+id/text_trend"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="User"
-                        android:textStyle="bold"
-                        android:textSize="24sp"
-                        android:fontFamily="@font/lato_bold"/>
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txt_trend"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Trending"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:fontFamily="@font/lato_light"/>
+
+                        <TextView
+                            android:id="@+id/txt_search"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:text="Search"
+                            android:gravity="right"
+                            android:textSize="20sp"
+                            android:fontFamily="@font/lato_light"/>
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_marginTop="8dp"
+                        android:id="@+id/recycler_trend"
+                        android:layout_below="@id/text_trend"
+                        android:layout_width="match_parent"
+                        android:layout_height="138dp"/>
+
+                    <TextView
+                        android:layout_marginTop="16dp"
+                        android:layout_below="@+id/recycler_trend"
+                        android:id="@+id/txt_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:text="Category"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/lato_light"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_marginTop="8dp"
+                        android:id="@+id/recycler_category"
+                        android:layout_below="@id/txt_category"
+                        tools:listitem="@layout/item_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"/>
+
+                    <TextView
+                        android:layout_marginTop="16dp"
+                        android:layout_below="@+id/recycler_category"
+                        android:id="@+id/txt_menu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:text="Our Menu"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/lato_light"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_menu"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/custom_item_horizontal"
+                        android:paddingHorizontal="16dp"
+                        android:paddingTop="16dp">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_menu"
+                            android:layout_width="match_parent"
+                            tools:listitem="@layout/item_recipe_vertical"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Apa yang ingin kamu masak hari ini?"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/lato_light"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_below="@+id/text_header"
-                android:id="@+id/text_trend"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/txt_trend"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Trending"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/lato_light"/>
-
-                <TextView
-                    android:id="@+id/txt_search"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Search"
-                    android:gravity="right"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/lato_light"/>
-
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginTop="8dp"
-                android:id="@+id/recycler_trend"
-                android:layout_below="@id/text_trend"
-                android:layout_width="match_parent"
-                android:layout_height="138dp"/>
-
-            <TextView
-                android:layout_marginTop="16dp"
-                android:layout_below="@+id/recycler_trend"
-                android:id="@+id/txt_category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Category"
-                android:textSize="20sp"
-                android:fontFamily="@font/lato_light"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginTop="8dp"
-                android:id="@+id/recycler_category"
-                android:layout_below="@id/txt_category"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"/>
-
-            <TextView
-                android:layout_marginTop="16dp"
-                android:layout_below="@+id/recycler_category"
-                android:id="@+id/txt_menu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Our Menu"
-                android:textSize="20sp"
-                android:fontFamily="@font/lato_light"/>
-
-            <RelativeLayout
-                android:layout_marginTop="16dp"
-                android:layout_below="@+id/txt_menu"
-                android:layout_width="match_parent"
-                android:layout_height="360dp"
-                android:paddingHorizontal="16dp"
-                android:paddingTop="16dp"
-                android:background="@drawable/custom_item_horizontal">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/recycler_menu"/>
-
-            </RelativeLayout>
+            </androidx.core.widget.NestedScrollView>
 
         </RelativeLayout>
 

@@ -20,7 +20,7 @@ import rpl.ezy.olread.view.RecipeDetailActivity
 class RecyclerAcceptedRecipesAdapter(var mContext: Context, var data: ArrayList<MRecipe>):RecyclerView.Adapter<RecyclerAcceptedRecipesAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_recipe, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_recipe_horizontal, parent, false)
         return ViewHolder(v)
     }
 

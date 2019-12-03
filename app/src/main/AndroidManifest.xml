@@ -12,10 +12,14 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.user.UserActivity"></activity>
-        <activity android:name=".view.RecipeDetailActivity"></activity>
-        <activity android:name=".view.admin.AdminActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".view.user.UserActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+        <activity android:name=".view.RecipeDetailActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+        <activity android:name=".view.admin.AdminActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity android:name=".view.auth.Authentification"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
