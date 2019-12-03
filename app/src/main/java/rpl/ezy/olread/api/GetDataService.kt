@@ -41,4 +41,7 @@ interface GetDataService {
 
     @GET("/recipes/kategori")
     fun getCategory(): Call<ResponseRecipes>
+
+    @GET("/recipes/archive/{user_id}")
+    fun getArchive(@Path("user_id") user_id: Int): Call<ResponseArchive>
 }

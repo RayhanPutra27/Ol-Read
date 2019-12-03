@@ -46,6 +46,9 @@ class UserActivity : AppCompatActivity() {
             actionLogout()
         }
 
+        btn_archive.setOnClickListener {
+            startActivity(Intent(this@UserActivity, ArchiveActivity::class.java))
+        }
     }
 
     fun actionLogout() {
@@ -74,12 +77,12 @@ class UserActivity : AppCompatActivity() {
                 if (response.body()!!.status == 200){
                     var data = response.body()!!.data
 
-                    var mAdapter = AcceptedRecipesAdapter(this@UserActivity, data)
-
-                    recycler_menu.apply {
-                        layoutManager = LinearLayoutManager(this@UserActivity)
-                        adapter = mAdapter
-                    }
+//                    var mAdapter = AcceptedRecipesAdapter(this@UserActivity, data)
+//
+//                    recycler_menu.apply {
+//                        layoutManager = LinearLayoutManager(this@UserActivity)
+//                        adapter = mAdapter
+//                    }
 
                 }
             }
