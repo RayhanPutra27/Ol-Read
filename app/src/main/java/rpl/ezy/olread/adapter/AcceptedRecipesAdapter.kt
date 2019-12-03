@@ -11,6 +11,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import rpl.ezy.olread.GlideApp
 import rpl.ezy.olread.R
 import rpl.ezy.olread.model.MRecipe
 import rpl.ezy.olread.utils.ConstantUtils
@@ -26,8 +28,9 @@ class AcceptedRecipesAdapter(var mContext: Context, var data: ArrayList<MRecipe>
     override fun getItemCount(): Int = data.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Glide.with(mContext)
+        GlideApp.with(mContext)
             .load(data[position].img_url)
+            .transform(RoundedCorners(8))
             .into(holder.img_item)
         holder.tv_title.text = data[position].title
         Log.d("TES_RECIPES", "${data[position].recipe}")

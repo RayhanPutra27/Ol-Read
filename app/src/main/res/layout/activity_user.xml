@@ -70,6 +70,7 @@
                                 android:text="Hallo"
                                 android:textSize="24sp"
                                 android:textStyle="bold"
+                                android:textColor="@color/black"
                                 android:fontFamily="@font/lato_bold"/>
 
                             <TextView
@@ -79,6 +80,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="User"
                                 android:textStyle="bold"
+                                android:textColor="@color/black"
                                 android:textSize="24sp"
                                 android:fontFamily="@font/lato_bold"/>
 
@@ -87,6 +89,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:text="Apa yang ingin kamu masak hari ini?"
                             android:textSize="18sp"
                             android:fontFamily="@font/lato_light"/>
@@ -106,6 +109,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Trending"
+                            android:textColor="@color/black"
                             android:textSize="20sp"
                             android:fontFamily="@font/lato_light"/>
 
@@ -113,6 +117,7 @@
                             android:id="@+id/txt_search"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:text="Search"
                             android:gravity="right"
                             android:textSize="20sp"
@@ -133,6 +138,7 @@
                         android:id="@+id/txt_category"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black"
                         android:text="Category"
                         android:textSize="20sp"
                         android:fontFamily="@font/lato_light"/>
@@ -150,6 +156,7 @@
                         android:id="@+id/txt_menu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black"
                         android:text="Our Menu"
                         android:textSize="20sp"
                         android:fontFamily="@font/lato_light"/>
@@ -166,6 +173,7 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recycler_menu"
                             android:layout_width="match_parent"
+                            tools:listitem="@layout/item_recipe_vertical"
                             android:layout_height="wrap_content" />
 
                     </RelativeLayout>
