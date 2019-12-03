@@ -16,11 +16,13 @@ import rpl.ezy.olread.api.RetrofitClientInstance
 import rpl.ezy.olread.response.ResponseRecipeById
 import rpl.ezy.olread.response.ResponseRecipes
 import rpl.ezy.olread.utils.ConstantUtils
+import rpl.ezy.olread.utils.ConstantUtils.ADMIN
 import rpl.ezy.olread.utils.ConstantUtils.RECIPE_ID
+import rpl.ezy.olread.utils.ConstantUtils.STATUS
+import rpl.ezy.olread.utils.ConstantUtils.USER
+import rpl.ezy.olread.utils.SharedPreferenceUtils
 
 class RecipeDetailActivity : AppCompatActivity() {
-
-//    var dataRecipe: MRecipe? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,16 +56,20 @@ class RecipeDetailActivity : AppCompatActivity() {
                 var dataRecipe = response.body()!!.data
 
                 Glide.with(this@RecipeDetailActivity)
-                    .load(dataRecipe!!.img_url)
+                    .load(dataRecipe.img_url)
                     .into(img_item)
 
-                tv_title.text = dataRecipe!!.title
-                tv_recipe.text = dataRecipe!!.recipe
+                tv_title.text = dataRecipe.title
+                tv_recipe.text = dataRecipe.recipe
 
-                if (dataRecipe!!.isAccept == ConstantUtils.ACCEPTED){
-                    bt_confirm.visibility = View.GONE
+                if (dataRecipe.isAccept == ConstantUtils.ACCEPTED){
+                    view_button.visibility = View.GONE
+                    tv_recipe.setPadding(0,0,0,70)
                 } else {
-                    bt_confirm.visibility = View.VISIBLE
+                    view_button.visibility = View.VISIBLE
+                    img_archive.visibility = View.GONE
+                    img_favorite.visibility = View.GONE
+                    tv_recipe.setPadding(0,0,0,70)
                 }
 
                 bt_confirm.setOnClickListener {

@@ -58,9 +58,9 @@ class AdminActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<ResponseRecipes>,response: Response<ResponseRecipes>) {
                 if (response.body()!!.status == 200){
-                    var data = response.body()!!.data
+                    val data = response.body()!!.data
 
-                    var mAdapter = RecyclerAcceptedRecipesAdapter(this@AdminActivity, data)
+                    val mAdapter = RecyclerAcceptedRecipesAdapter(this@AdminActivity, data)
 
                     rv_acceptedRecipe.apply {
                         layoutManager = LinearLayoutManager(this@AdminActivity, LinearLayoutManager.HORIZONTAL, false)
@@ -89,12 +89,12 @@ class AdminActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<ResponseRecipes>,response: Response<ResponseRecipes>) {
                 if (response.body()!!.status == 200){
-                    var data = response.body()!!.data
+                    val data = response.body()!!.data
 
-                    var mAdapter = RecyclerUnAcceptedRecipesAdapter(this@AdminActivity, data)
+                    val mAdapter = RecyclerUnAcceptedRecipesAdapter(this@AdminActivity, data)
 
                     rv_unAcceptedRecipes.apply {
-                        layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.HORIZONTAL, false)
+                        layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
                         adapter = mAdapter
                     }
 
