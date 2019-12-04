@@ -2,8 +2,11 @@ package rpl.ezy.olread.view.user
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_category.*
 import kotlinx.android.synthetic.main.activity_search.*
@@ -22,9 +25,60 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
+        setRecyclerNull()
+
         search.setOnClickListener {
-            setRecyclerMenu(txt_search.text.toString())
+            if(txt_search.text.toString() != "") {
+                setRecyclerMenu(txt_search.text.toString())
+            } else {
+                setRecyclerNull()
+            }
         }
+        txt_search.addTextChangedListener(object: TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+                if(s.toString() == ""){
+                    setRecyclerNull()
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+        })
+    }
+
+
+    fun setRecyclerNull(){
+        val service =
+            RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
+        val call = service.getAcceptedRecipe()
+        call.enqueue(object : Callback<ResponseRecipes> {
+            override fun onFailure(call: Call<ResponseRecipes>, t: Throwable) {
+                Toast.makeText(
+                    this@SearchActivity,
+                    "Something went wrong...Please try later!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.d("LOGLOGAN", "${t.message}")
+            }
+
+            override fun onResponse(call: Call<ResponseRecipes>, response: Response<ResponseRecipes>) {
+                if (response.body()!!.status == 200){
+                    var data = response.body()!!.data
+
+                    var mAdapter = AcceptedRecipesAdapter(this@SearchActivity, data)
+
+                    recycler_menu.apply {
+                        layoutManager = LinearLayoutManager(this@SearchActivity)
+                        adapter = mAdapter
+                    }
+
+                }
+            }
+        })
     }
 
     fun setRecyclerMenu(title: String){
