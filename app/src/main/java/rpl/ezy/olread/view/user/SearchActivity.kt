@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_category.*
@@ -26,6 +27,8 @@ class SearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_search)
 
         setRecyclerNull()
+        val window = this.window
+        window.statusBarColor = ContextCompat.getColor(this, R.color.green_1)
 
         search.setOnClickListener {
             if(txt_search.text.toString() != "") {

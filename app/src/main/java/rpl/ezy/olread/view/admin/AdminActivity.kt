@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_admin.*
 import retrofit2.Call
@@ -35,6 +36,8 @@ class AdminActivity : AppCompatActivity() {
         bt_logout.setOnClickListener {
             ActionLogout()
         }
+        val window = this.window
+        window.statusBarColor = ContextCompat.getColor(this, R.color.green_1)
     }
 
     fun AcceptedRecipe(){

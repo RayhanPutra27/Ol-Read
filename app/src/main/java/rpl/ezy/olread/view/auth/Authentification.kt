@@ -3,6 +3,7 @@ package rpl.ezy.olread.view.auth
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import rpl.ezy.olread.MainActivity
 import kotlinx.android.synthetic.main.activity_authentification.*
 import rpl.ezy.olread.R
@@ -40,6 +41,8 @@ class Authentification : AppCompatActivity() {
         }
 
         signup()
+        val window = this.window
+        window.statusBarColor = ContextCompat.getColor(this, R.color.green_1)
     }
 
     fun signup() {

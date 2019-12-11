@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_recipe_detail.*
 import retrofit2.Call
@@ -41,6 +42,8 @@ class RecipeDetailActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT
             ).show()
         }
+        val window = this.window
+        window.statusBarColor = ContextCompat.getColor(this, R.color.green_1)
 
     }
 
