@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import retrofit2.Call
 import retrofit2.Callback
@@ -51,6 +52,8 @@ class SignupFragment : Fragment() {
         etPassword = view.findViewById(R.id.et_pass_reg)
 
         signup()
+        val window = activity!!.window
+        window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.green_1)
 
         return view
     }

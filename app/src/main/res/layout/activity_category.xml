@@ -8,8 +8,9 @@
     tools:context=".view.user.CategoryActivity">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"/>
+        android:layout_height="?attr/actionBarSize" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_kategori"

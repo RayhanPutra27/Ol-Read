@@ -1,26 +1,25 @@
 package rpl.ezy.olread.view.user
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_user.*
 import kotlinx.android.synthetic.main.navigation_main_user.*
-import kotlinx.android.synthetic.main.navigation_main_user.bt_logout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import rpl.ezy.olread.R
 import rpl.ezy.olread.adapter.AcceptedRecipesAdapter
 import rpl.ezy.olread.adapter.CategoryAdapter
-import rpl.ezy.olread.adapter.RecyclerAcceptedRecipesAdapter
 import rpl.ezy.olread.api.GetDataService
 import rpl.ezy.olread.api.RetrofitClientInstance
 import rpl.ezy.olread.model.MUser
-import rpl.ezy.olread.response.ResponseCategory
 import rpl.ezy.olread.response.ResponseRecipes
 import rpl.ezy.olread.response.ResponseUsers
 import rpl.ezy.olread.utils.ConstantUtils
@@ -35,6 +34,14 @@ class UserActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
+
+        setSupportActionBar(header)
+        header.navigationIcon = resources.getDrawable(R.drawable.nav)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        val drawerToggle = ActionBarDrawerToggle(this, drawer_layout, header, 0, 0)
+        drawer_layout.setDrawerListener(drawerToggle)
+        val window = this.window
+        window.statusBarColor = ContextCompat.getColor(this, R.color.green_1)
 
         sharedPreferences = SharedPreferenceUtils(this@UserActivity)
         responseDataUser()
@@ -63,7 +70,7 @@ class UserActivity : AppCompatActivity() {
         finish()
     }
 
-    fun setRecyclerMenu(){
+    fun setRecyclerMenu() {
         val service =
             RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
         val call = service.getAcceptedRecipe()
@@ -77,8 +84,11 @@ class UserActivity : AppCompatActivity() {
                 Log.d("LOGLOGAN", "${t.message}")
             }
 
-            override fun onResponse(call: Call<ResponseRecipes>, response: Response<ResponseRecipes>) {
-                if (response.body()!!.status == 200){
+            override fun onResponse(
+                call: Call<ResponseRecipes>,
+                response: Response<ResponseRecipes>
+            ) {
+                if (response.body()!!.status == 200) {
                     var data = response.body()!!.data
 
                     var mAdapter = AcceptedRecipesAdapter(this@UserActivity, data)
@@ -94,9 +104,10 @@ class UserActivity : AppCompatActivity() {
     }
 
     fun setRecyclerCategory() {
-        val service = RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
+        val service =
+            RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
         val call = service.getCategory()
-        call.enqueue(object : Callback<ResponseRecipes>{
+        call.enqueue(object : Callback<ResponseRecipes> {
             override fun onFailure(call: Call<ResponseRecipes>, t: Throwable) {
                 Toast.makeText(
                     this@UserActivity,
@@ -106,12 +117,19 @@ class UserActivity : AppCompatActivity() {
                 Log.d("LOGLOGAN", "${t.message}")
             }
 
-            override fun onResponse(call: Call<ResponseRecipes>,response: Response<ResponseRecipes>) {
-                if(response.body()!!.status == 200) {
+            override fun onResponse(
+                call: Call<ResponseRecipes>,
+                response: Response<ResponseRecipes>
+            ) {
+                if (response.body()!!.status == 200) {
                     var data = response.body()!!.data
                     var mAdapter = CategoryAdapter(this@UserActivity, data)
                     recycler_category.apply {
-                        layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.HORIZONTAL, false)
+                        layoutManager = LinearLayoutManager(
+                            applicationContext,
+                            LinearLayoutManager.HORIZONTAL,
+                            false
+                        )
                         adapter = mAdapter
                     }
                 }
@@ -141,7 +159,10 @@ class UserActivity : AppCompatActivity() {
                     val data = response.body()!!.data
 
                     for (i in 0 until data.size) {
-                        if (data[i].user_id == sharedPreferences!!.getIntSharedPreferences(ConstantUtils.USER_ID)) {
+                        if (data[i].user_id == sharedPreferences!!.getIntSharedPreferences(
+                                ConstantUtils.USER_ID
+                            )
+                        ) {
                             mUser = data[i]
                             break
                         }
