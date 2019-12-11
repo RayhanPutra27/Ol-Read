@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import kotlinx.android.synthetic.main.fragment_login.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,7 +29,8 @@ import rpl.ezy.olread.utils.ConstantUtils.USER
 import rpl.ezy.olread.utils.ConstantUtils.USERNAME
 import rpl.ezy.olread.utils.ConstantUtils.USER_ID
 import rpl.ezy.olread.utils.SharedPreferenceUtils
-import rpl.ezy.olread.view.AdminActivity
+import rpl.ezy.olread.view.admin.AdminActivity
+import rpl.ezy.olread.view.user.UserActivity
 
 /**
  * A simple [Fragment] subclass.
@@ -102,7 +102,7 @@ class LoginFragment : Fragment() {
                     }
 
                     SetDataUser(STATUS, USER, "")
-                    startActivity(Intent(context, MainActivity::class.java))
+                    startActivity(Intent(context, UserActivity::class.java))
                     (context as Activity).finish()
                 } else {
                     Toast.makeText(

@@ -12,7 +12,6 @@ import retrofit2.Response
 import rpl.ezy.olread.api.GetDataService
 import rpl.ezy.olread.api.RetrofitClientInstance
 import rpl.ezy.olread.model.MUser
-import rpl.ezy.olread.response.ResponseLogin
 import rpl.ezy.olread.response.ResponseUsers
 import rpl.ezy.olread.utils.ConstantUtils.ADMIN
 import rpl.ezy.olread.utils.ConstantUtils.EMAIL
@@ -20,7 +19,7 @@ import rpl.ezy.olread.utils.ConstantUtils.USER
 import rpl.ezy.olread.utils.ConstantUtils.USERNAME
 import rpl.ezy.olread.utils.ConstantUtils.USER_ID
 import rpl.ezy.olread.utils.SharedPreferenceUtils
-import rpl.ezy.olread.view.Authentification
+import rpl.ezy.olread.view.auth.Authentification
 
 class MainActivity : AppCompatActivity() {
 

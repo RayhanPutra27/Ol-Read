@@ -6,18 +6,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import rpl.ezy.olread.MainActivity
-
 import rpl.ezy.olread.R
 import rpl.ezy.olread.api.GetDataService
 import rpl.ezy.olread.api.RetrofitClientInstance
@@ -28,6 +26,7 @@ import rpl.ezy.olread.utils.ConstantUtils.USER
 import rpl.ezy.olread.utils.ConstantUtils.USERNAME
 import rpl.ezy.olread.utils.ConstantUtils.USER_ID
 import rpl.ezy.olread.utils.SharedPreferenceUtils
+import rpl.ezy.olread.view.user.UserActivity
 
 /**
  * A simple [Fragment] subclass.
@@ -125,7 +124,7 @@ class SignupFragment : Fragment() {
                     SetDataUser(EMAIL, 0, data.email)
                     SetDataUser(STATUS, USER, "")
 
-                    startActivity(Intent(context, MainActivity::class.java))
+                    startActivity(Intent(context, UserActivity::class.java))
                     (context as Activity).finish()
                 } else {
                     Toast.makeText(

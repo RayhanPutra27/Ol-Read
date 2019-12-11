@@ -17,7 +17,7 @@ class SharedPreferenceUtils(mContext : Context) {
         edit.commit()
     }
 
-    fun getStringSharedPreferences(key: String): String {
+    fun getStringSharedPreferences(key: String): String? {
         return shared.getString(key, "")
     }
 
