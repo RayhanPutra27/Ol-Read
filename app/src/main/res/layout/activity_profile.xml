@@ -184,13 +184,14 @@
             android:text="Add Recipes"
             android:textSize="24sp"
             android:layout_weight="1"
+            android:layout_marginEnd="-24dp"
             android:gravity="center"
             android:textColor="#FFFFFF"
             android:fontFamily="@font/lato_bold"/>
 
         <ImageView
             android:id="@+id/add_recipe"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="-24dp"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/plus"/>
