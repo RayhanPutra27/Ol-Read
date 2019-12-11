@@ -26,7 +26,7 @@ class CategoryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_category)
 
         setSupportActionBar(header)
-        header.navigationIcon = resources.getDrawable(R.drawable.back_black)
+//        header.navigationIcon = resources.getDrawable(R.drawable.back_black)
         header.setNavigationOnClickListener {
             finish()
         }

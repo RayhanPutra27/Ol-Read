@@ -11,6 +11,7 @@ object ConstantUtils {
     const val USER_ID = "user_id"
     const val USERNAME = "username"
     const val EMAIL = "email"
+    const val PROFIL = "profil"
     const val STATUS = "status"
 
 
