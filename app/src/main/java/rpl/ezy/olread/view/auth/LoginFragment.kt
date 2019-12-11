@@ -24,6 +24,7 @@ import rpl.ezy.olread.api.RetrofitClientInstance
 import rpl.ezy.olread.response.ResponseLogin
 import rpl.ezy.olread.utils.ConstantUtils.ADMIN
 import rpl.ezy.olread.utils.ConstantUtils.EMAIL
+import rpl.ezy.olread.utils.ConstantUtils.PROFIL
 import rpl.ezy.olread.utils.ConstantUtils.STATUS
 import rpl.ezy.olread.utils.ConstantUtils.USER
 import rpl.ezy.olread.utils.ConstantUtils.USERNAME
@@ -93,6 +94,7 @@ class LoginFragment : Fragment() {
                     SetDataUser(USER_ID, data.user_id, "")
                     SetDataUser(USERNAME, 0, data.username)
                     SetDataUser(EMAIL, 0, data.email)
+                    SetDataUser(PROFIL, 0, data.profil)
 
                     if (data.status == ADMIN){
                         SetDataUser(STATUS, ADMIN, "")

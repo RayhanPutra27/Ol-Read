@@ -14,19 +14,17 @@ import rpl.ezy.olread.R
 import rpl.ezy.olread.api.GetDataService
 import rpl.ezy.olread.api.RetrofitClientInstance
 import rpl.ezy.olread.model.MRecipe
-import rpl.ezy.olread.response.ResponseArchive
-import rpl.ezy.olread.response.ResponseRecipeById
 import rpl.ezy.olread.response.ResponseRecipes
+import rpl.ezy.olread.response.ResponseRecipeById
 import rpl.ezy.olread.utils.ConstantUtils
-import rpl.ezy.olread.utils.ConstantUtils.ADMIN
 import rpl.ezy.olread.utils.ConstantUtils.RECIPE_ID
-import rpl.ezy.olread.utils.ConstantUtils.STATUS
-import rpl.ezy.olread.utils.ConstantUtils.USER
+import rpl.ezy.olread.utils.ConstantUtils.USER_ID
 import rpl.ezy.olread.utils.SharedPreferenceUtils
 
 class RecipeDetailActivity : AppCompatActivity() {
 
     var sharedPref: SharedPreferenceUtils? = null
+    var archived = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,16 +33,64 @@ class RecipeDetailActivity : AppCompatActivity() {
         sharedPref = SharedPreferenceUtils(this@RecipeDetailActivity)
         if (intent != null) {
             setData(intent.getIntExtra(RECIPE_ID, 0))
-            Toast.makeText(
-                this@RecipeDetailActivity,
-                "${intent.getIntExtra(RECIPE_ID,0)}",
-                Toast.LENGTH_SHORT
-            ).show()
+
+            img_archive.setOnClickListener {
+                if (archived){
+                    delArchive(sharedPref!!.getIntSharedPreferences(USER_ID), intent.getIntExtra(RECIPE_ID, 0))
+                    return@setOnClickListener
+                }
+                if (!archived){
+                    archivingRecipe(sharedPref!!.getIntSharedPreferences(USER_ID), intent.getIntExtra(RECIPE_ID, 0))
+                    return@setOnClickListener
+                }
+            }
         }
 
     }
 
-    fun setData(recipe_id: Int) {
+    private fun archivingRecipe(user_id: Int, recipe_id: Int){
+        val service = RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
+        val call = service.archivingRecipe(user_id, recipe_id)
+        call.enqueue(object: Callback<ResponseRecipes>{
+            override fun onFailure(call: Call<ResponseRecipes>, t: Throwable) {
+                Toast.makeText(
+                    this@RecipeDetailActivity,
+                    "Something went wrong...Please try later!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.d("LOGLOGAN", "${t.message}")
+            }
+
+            override fun onResponse(call: Call<ResponseRecipes>, response: Response<ResponseRecipes>) {
+                img_archive.setImageResource(R.drawable.bookmark_black)
+                archived = true
+            }
+
+        })
+    }
+
+    private fun delArchive(user_id: Int, recipe_id: Int){
+        val service = RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
+        val call = service.delArchive(user_id, recipe_id)
+        call.enqueue(object: Callback<ResponseRecipes>{
+            override fun onFailure(call: Call<ResponseRecipes>, t: Throwable) {
+                Toast.makeText(
+                    this@RecipeDetailActivity,
+                    "Something went wrong...Please try later!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.d("LOGLOGAN", "${t.message}")
+            }
+
+            override fun onResponse(call: Call<ResponseRecipes>, response: Response<ResponseRecipes>) {
+                img_archive.setImageResource(R.drawable.bookmark_white)
+                archived = false
+            }
+
+        })
+    }
+
+    private fun setData(recipe_id: Int) {
         val service = RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
         val call = service.getRecipeById(recipe_id)
         call.enqueue(object : Callback<ResponseRecipeById> {
@@ -58,7 +104,7 @@ class RecipeDetailActivity : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call<ResponseRecipeById>, response: Response<ResponseRecipeById>) {
-                var dataRecipe = response.body()!!.data
+                val dataRecipe = response.body()!!.data
 
                 Glide.with(this@RecipeDetailActivity)
                     .load(dataRecipe.img_url)
@@ -69,7 +115,6 @@ class RecipeDetailActivity : AppCompatActivity() {
 
                 if (dataRecipe.isAccept == ConstantUtils.ACCEPTED){
                     view_button.visibility = View.GONE
-//                    tv_recipe.setPadding(0,0,0,70)
                 } else {
                     view_button.visibility = View.VISIBLE
                     img_archive.visibility = View.GONE
@@ -78,7 +123,7 @@ class RecipeDetailActivity : AppCompatActivity() {
                 }
 
                 bt_confirm.setOnClickListener {
-                    ConfirmRecipe(recipe_id)
+                    confirmRecipe(recipe_id)
                 }
 
                 getArchive(dataRecipe)
@@ -87,7 +132,7 @@ class RecipeDetailActivity : AppCompatActivity() {
         })
     }
 
-    fun ConfirmRecipe(recipe_id: Int){
+    private fun confirmRecipe(recipe_id: Int){
         val service = RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
         val call = service.confirmRecipes(recipe_id)
         call.enqueue(object : Callback<ResponseRecipes> {
@@ -103,7 +148,7 @@ class RecipeDetailActivity : AppCompatActivity() {
             override fun onResponse(call: Call<ResponseRecipes>,response: Response<ResponseRecipes>) {
                 Toast.makeText(
                     this@RecipeDetailActivity,
-                    "${response.body()!!.message}",
+                    response.body()!!.message,
                     Toast.LENGTH_SHORT
                 ).show()
                 finish()
@@ -115,9 +160,9 @@ class RecipeDetailActivity : AppCompatActivity() {
     private fun getArchive(dataRecipe: MRecipe) {
         val service =
             RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
-        val call = service.getArchive(sharedPref!!.getIntSharedPreferences(ConstantUtils.USER_ID))
-        call.enqueue(object : Callback<ResponseArchive> {
-            override fun onFailure(call: Call<ResponseArchive>, t: Throwable) {
+        val call = service.getArchivebyId(sharedPref!!.getIntSharedPreferences(USER_ID))
+        call.enqueue(object : Callback<ResponseRecipes> {
+            override fun onFailure(call: Call<ResponseRecipes>, t: Throwable) {
                 Toast.makeText(
                     this@RecipeDetailActivity,
                     "Something went wrong...Please try later!",
@@ -127,13 +172,14 @@ class RecipeDetailActivity : AppCompatActivity() {
             }
 
             override fun onResponse(
-                call: Call<ResponseArchive>,
-                response: Response<ResponseArchive>
+                call: Call<ResponseRecipes>,
+                response: Response<ResponseRecipes>
             ) {
-                var data = response.body()!!.data
+                val data = response.body()!!.data
                 for (i in 0 until data.size) {
                     if (data[i].recipe_id == dataRecipe.recipe_id){
                         img_archive.setImageResource(R.drawable.bookmark_black)
+                        archived = true
                     }
                 }
             }
