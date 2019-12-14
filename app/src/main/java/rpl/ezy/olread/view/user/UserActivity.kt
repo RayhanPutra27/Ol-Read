@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_archive.*
+import kotlinx.android.synthetic.main.activity_favorite.*
 import kotlinx.android.synthetic.main.activity_user.*
 import kotlinx.android.synthetic.main.activity_user.img_profile
 import kotlinx.android.synthetic.main.activity_user.txt_user
@@ -48,8 +49,9 @@ class UserActivity : AppCompatActivity() {
             .into(nav_profile)
         txt_user.text = sharedPreferences!!.getStringSharedPreferences(ConstantUtils.USERNAME)
 
-        setRecyclerMenu()
+        setRecyclerTrends()
         setRecyclerCategory()
+        setRecyclerMenu()
 
         nav_profile.setOnClickListener {
             startActivity(Intent(this@UserActivity, ProfileActivity::class.java))
@@ -63,6 +65,10 @@ class UserActivity : AppCompatActivity() {
             startActivity(Intent(this@UserActivity, HistoryActivity::class.java))
         }
 
+        btn_favorite.setOnClickListener {
+            startActivity(Intent(this@UserActivity, FavoriteActivity::class.java))
+        }
+
         txt_search.setOnClickListener {
             startActivity(Intent(this@UserActivity, SearchActivity::class.java))
         }
@@ -72,7 +78,7 @@ class UserActivity : AppCompatActivity() {
         }
     }
 
-    fun actionLogout() {
+     private fun actionLogout() {
         sharedPreferences!!.setSharedPreferences(ConstantUtils.USER_ID, -1)
         sharedPreferences!!.setSharedPreferences(ConstantUtils.USERNAME, "")
         sharedPreferences!!.setSharedPreferences(ConstantUtils.EMAIL, "")
@@ -80,7 +86,7 @@ class UserActivity : AppCompatActivity() {
         finish()
     }
 
-    fun setRecyclerMenu(){
+    private fun setRecyclerMenu(){
         val service =
             RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
         val call = service.getAcceptedRecipe()
@@ -110,7 +116,7 @@ class UserActivity : AppCompatActivity() {
         })
     }
 
-    fun setRecyclerCategory() {
+    private fun setRecyclerCategory() {
         val service = RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
         val call = service.getCategory()
         call.enqueue(object : Callback<ResponseRecipes>{
@@ -138,4 +144,40 @@ class UserActivity : AppCompatActivity() {
 
     }
 
+    private fun setRecyclerTrends(){
+        val service =
+            RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
+        val call = service.getTrendsRecipe()
+        call.enqueue(object : Callback<ResponseRecipes> {
+            override fun onFailure(call: Call<ResponseRecipes>, t: Throwable) {
+                Toast.makeText(
+                    this@UserActivity,
+                    "Something went wrong...Please try later!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.d("LOGLOGAN", "${t.message}")
+            }
+
+            override fun onResponse(call: Call<ResponseRecipes>, response: Response<ResponseRecipes>) {
+                if (response.body()!!.status == 200){
+                    var data = response.body()!!.data
+
+                    val mAdapter = RecyclerAcceptedRecipesAdapter(this@UserActivity, data)
+
+                    recycler_trend.apply {
+                        layoutManager = LinearLayoutManager(this@UserActivity, LinearLayoutManager.HORIZONTAL, false)
+                        adapter = mAdapter
+                    }
+
+                }
+            }
+        })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setRecyclerTrends()
+        setRecyclerCategory()
+        setRecyclerMenu()
+    }
 }

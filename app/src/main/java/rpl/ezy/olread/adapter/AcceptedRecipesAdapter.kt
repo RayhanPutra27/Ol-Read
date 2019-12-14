@@ -34,6 +34,9 @@ class AcceptedRecipesAdapter(var mContext: Context, var data: ArrayList<MRecipe>
             .into(holder.img_item)
         holder.tv_title.text = data[position].title
         holder.tv_kategori.text = data[position].kategori
+        if(data[position].like != 0){
+            holder.tv_like.text = "${data[position].like} likes"
+        }
 
         Log.d("TES_RECIPES", "${data[position].recipe}")
 
@@ -49,6 +52,7 @@ class AcceptedRecipesAdapter(var mContext: Context, var data: ArrayList<MRecipe>
         var img_item = v.findViewById(R.id.img_item) as ImageView
         var tv_title = v.findViewById(R.id.tv_title) as TextView
         var tv_kategori = v.findViewById(R.id.tv_kategori) as TextView
+        var tv_like = v.findViewById(R.id.tv_like) as TextView
     }
 
 }

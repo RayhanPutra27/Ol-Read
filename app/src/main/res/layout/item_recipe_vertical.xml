@@ -42,24 +42,41 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/lato_bold"
                 android:maxLines="2"
-                android:text="title asd as "
+                android:text="Title"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/tv_kategori"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:ellipsize="end"
-                android:fontFamily="@font/lato_regular"
-                android:maxLines="2"
-                android:text="title asd as "
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_kategori"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/lato_regular"
+                    android:maxLines="1"
+                    android:text="Kategori"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:maxLines="1"
+                    android:text="0 likes"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

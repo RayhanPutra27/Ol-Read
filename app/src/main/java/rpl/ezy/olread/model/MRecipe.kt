@@ -7,5 +7,6 @@ class MRecipe (
     var kategori: String,
     var recipe: String,
     var img_url: String,
+    var like: Int,
     var isAccept: Int
 )

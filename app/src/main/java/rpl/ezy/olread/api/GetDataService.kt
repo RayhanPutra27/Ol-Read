@@ -58,6 +58,9 @@ interface GetDataService {
     @GET("recipes/users/{user_id}")
     fun getRecipeByUser(@Path("user_id") user_id: Int): Call<ResponseRecipes>
 
+    @GET("recipes/trends")
+    fun getTrendsRecipe(): Call<ResponseRecipes>
+
     // Archive
     @GET("recipes/archive/{user_id}")
     fun getArchivebyId(@Path("user_id") user_id: Int): Call<ResponseRecipes>
@@ -72,6 +75,24 @@ interface GetDataService {
     @FormUrlEncoded
     @POST("recipes/archive/delete")
     fun delArchive(
+        @Field("user_id") user_id: Int,
+        @Field("recipe_id") recipe_id: Int
+    ): Call<ResponseRecipes>
+
+    // Like
+    @GET("recipes/like/{user_id}")
+    fun getLikebyId(@Path("user_id") user_id: Int): Call<ResponseRecipes>
+
+    @FormUrlEncoded
+    @POST("recipes/like")
+    fun likeRecipe(
+        @Field("user_id") user_id: Int,
+        @Field("recipe_id") recipe_id: Int
+    ): Call<ResponseRecipes>
+
+    @FormUrlEncoded
+    @POST("recipes/like/delete")
+    fun delLike(
         @Field("user_id") user_id: Int,
         @Field("recipe_id") recipe_id: Int
     ): Call<ResponseRecipes>

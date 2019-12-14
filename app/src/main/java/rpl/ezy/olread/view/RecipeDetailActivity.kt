@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.activity_recipe_detail.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -26,6 +27,7 @@ class RecipeDetailActivity : AppCompatActivity() {
 
     var sharedPref: SharedPreferenceUtils? = null
     var archived = false
+    var liked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +44,17 @@ class RecipeDetailActivity : AppCompatActivity() {
                 }
                 if (!archived){
                     archivingRecipe(sharedPref!!.getIntSharedPreferences(USER_ID), intent.getIntExtra(RECIPE_ID, 0))
+                    return@setOnClickListener
+                }
+            }
+
+            img_favorite.setOnClickListener {
+                if (liked){
+                    delLike(sharedPref!!.getIntSharedPreferences(USER_ID), intent.getIntExtra(RECIPE_ID, 0))
+                    return@setOnClickListener
+                }
+                if (!liked){
+                    likeRecipe(sharedPref!!.getIntSharedPreferences(USER_ID), intent.getIntExtra(RECIPE_ID, 0))
                     return@setOnClickListener
                 }
             }
@@ -93,6 +106,48 @@ class RecipeDetailActivity : AppCompatActivity() {
         })
     }
 
+    private fun likeRecipe(user_id: Int, recipe_id: Int){
+        val service = RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
+        val call = service.likeRecipe(user_id, recipe_id)
+        call.enqueue(object: Callback<ResponseRecipes>{
+            override fun onFailure(call: Call<ResponseRecipes>, t: Throwable) {
+                Toast.makeText(
+                    this@RecipeDetailActivity,
+                    "Something went wrong...Please try later!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.d("LOGLOGAN", "${t.message}")
+            }
+
+            override fun onResponse(call: Call<ResponseRecipes>, response: Response<ResponseRecipes>) {
+                img_favorite.setImageResource(R.drawable.love_fill)
+                liked = true
+            }
+
+        })
+    }
+
+    private fun delLike(user_id: Int, recipe_id: Int){
+        val service = RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
+        val call = service.delLike(user_id, recipe_id)
+        call.enqueue(object: Callback<ResponseRecipes>{
+            override fun onFailure(call: Call<ResponseRecipes>, t: Throwable) {
+                Toast.makeText(
+                    this@RecipeDetailActivity,
+                    "Something went wrong...Please try later!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.d("LOGLOGAN", "${t.message}")
+            }
+
+            override fun onResponse(call: Call<ResponseRecipes>, response: Response<ResponseRecipes>) {
+                img_favorite.setImageResource(R.drawable.love)
+                liked = false
+            }
+
+        })
+    }
+
     private fun setData(recipe_id: Int) {
         val service = RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
         val call = service.getRecipeById(recipe_id)
@@ -130,6 +185,7 @@ class RecipeDetailActivity : AppCompatActivity() {
                 }
 
                 getArchive(dataRecipe)
+                getLike(dataRecipe)
 
             }
         })
@@ -183,6 +239,35 @@ class RecipeDetailActivity : AppCompatActivity() {
                     if (data[i].recipe_id == dataRecipe.recipe_id){
                         img_archive.setImageResource(R.drawable.bookmark_black)
                         archived = true
+                    }
+                }
+            }
+        })
+    }
+
+    private fun getLike(dataRecipe: MRecipe) {
+        val service =
+            RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
+        val call = service.getLikebyId(sharedPref!!.getIntSharedPreferences(USER_ID))
+        call.enqueue(object : Callback<ResponseRecipes> {
+            override fun onFailure(call: Call<ResponseRecipes>, t: Throwable) {
+                Toast.makeText(
+                    this@RecipeDetailActivity,
+                    "Something went wrong...Please try later!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.d("LOGLOGAN", "${t.message}")
+            }
+
+            override fun onResponse(
+                call: Call<ResponseRecipes>,
+                response: Response<ResponseRecipes>
+            ) {
+                val data = response.body()!!.data
+                for (i in 0 until data.size) {
+                    if (data[i].recipe_id == dataRecipe.recipe_id){
+                        img_favorite.setImageResource(R.drawable.love_fill)
+                        liked = true
                     }
                 }
             }
