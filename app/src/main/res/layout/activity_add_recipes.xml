@@ -9,114 +9,175 @@
     tools:context=".view.user.AddRecipesActivity"
     tools:ignore="UnusedAttribute">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/custom_item_horizontal"
+        android:orientation="vertical"
         android:paddingHorizontal="16dp"
         android:paddingVertical="16dp"
-        android:background="@drawable/custom_item_horizontal">
-
-        <ImageView
-            android:id="@+id/image_add"
-            android:layout_width="match_parent"
-            android:background="@drawable/custom_image_add"
-            android:layout_height="250dp"/>
+        android:weightSum="3">
 
         <RelativeLayout
-            android:layout_marginTop="16dp"
-            android:layout_below="@+id/image_add"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_weight="1.15">
+
+            <LinearLayout
+                android:id="@+id/layout_pick_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+                <ImageButton
+                    android:id="@+id/pick_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_add"/>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/image_add"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@+id/image_add"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1.6"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/linear_judul"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/text_judul"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Title"
                     android:fontFamily="@font/lato_bold"
-                    android:textSize="18dp"/>
+                    android:text="Title"
+                    android:textSize="18dp" />
 
-                <EditText
-                    android:layout_marginTop="8dp"
-                    android:id="@+id/ev_judul"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="@drawable/bg_text_auth"
-                    android:fontFamily="@font/lato_light"
-                    android:inputType="textEmailAddress"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey_1" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_text_auth">
+
+                    <EditText
+                        android:id="@+id/txt_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="4dp"
+                        android:background="@color/transparent"
+                        android:fontFamily="@font/lato_light"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey_1" />
+                </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="8dp"
                 android:id="@+id/linear_kategori"
-                android:layout_below="@+id/linear_judul"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linear_judul"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/text_ketegori"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Category"
                     android:fontFamily="@font/lato_bold"
-                    android:textSize="18dp"/>
+                    android:text="Category"
+                    android:textSize="18dp" />
 
-                <EditText
-                    android:id="@+id/ev_kategori"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_text_auth"
-                    android:fontFamily="@font/lato_light"
-                    android:inputType="textEmailAddress"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey_1" />
+                    android:background="@drawable/bg_text_auth">
+
+                    <EditText
+                        android:id="@+id/txt_kategori"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/lato_light"
+                        android:background="@color/transparent"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey_1" />
+                </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="8dp"
                 android:id="@+id/linear_recipe"
-                android:layout_below="@+id/linear_kategori"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linear_kategori"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/text_recipe"
-                    android:layout_marginTop="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Recipes"
-                    android:fontFamily="@font/lato_bold"
-                    android:textSize="18dp"/>
-
-                <EditText
                     android:layout_marginTop="8dp"
-                    android:id="@+id/ev_recipe"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Recipes"
+                    android:textSize="18dp" />
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="199dp"
-                    android:background="@drawable/bg_text_auth"
-                    android:fontFamily="@font/lato_light"
-                    android:inputType="textEmailAddress"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey_1"
-                    tools:ignore="ScrollViewSize" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_text_auth">
+
+                    <EditText
+                        android:id="@+id/txt_recipe"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/lato_light"
+                        android:background="@color/transparent"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey_1" />
+                </LinearLayout>
 
             </LinearLayout>
 
-        </RelativeLayout>
+        </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/add_recipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_btn_add"
+        android:fontFamily="@font/lato_bold"
+        android:paddingHorizontal="16dp"
+        android:text="Add"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
 </RelativeLayout>

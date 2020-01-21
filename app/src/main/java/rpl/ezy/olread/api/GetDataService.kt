@@ -1,9 +1,12 @@
 package rpl.ezy.olread.api
 
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 import rpl.ezy.olread.model.MRecipe
 import rpl.ezy.olread.response.*
+import java.io.File
 
 
 interface GetDataService {
@@ -96,4 +99,16 @@ interface GetDataService {
         @Field("user_id") user_id: Int,
         @Field("recipe_id") recipe_id: Int
     ): Call<ResponseRecipes>
+
+    @Multipart
+    @POST("recipes/request")
+    fun reqRecipe(
+        @Part("user_id") user_id: RequestBody,
+        @Part("title") title: RequestBody,
+        @Part("recipe") recipe: RequestBody,
+//        @Part("img_url") image: File,
+        @Part img_url: MultipartBody.Part,
+        @Part("kategori") kategori: RequestBody
+    ): Call<ResponseAddRecipe>
+
 }
