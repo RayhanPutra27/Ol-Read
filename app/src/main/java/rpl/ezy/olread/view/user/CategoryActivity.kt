@@ -25,17 +25,12 @@ class CategoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
 
-        setSupportActionBar(header)
-//        header.navigationIcon = resources.getDrawable(R.drawable.back_black)
-        header.setNavigationOnClickListener {
-            finish()
-        }
-
         val window = this.window
         window.statusBarColor = ContextCompat.getColor(this, R.color.green_1)
 
         if(intent != null) {
             kategori = intent.getStringExtra(KATEGORI)
+            nama_category.setText(kategori)
         }
 
         setRecyclerMenu()

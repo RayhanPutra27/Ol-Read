@@ -13,14 +13,12 @@
             android:paddingTop="16dp"
             android:paddingHorizontal="16dp">
 
-
                 <ImageView
                     android:layout_marginStart="-12dp"
                     android:id="@+id/bt_logout"
                     android:layout_width="42dp"
                     android:layout_height="32dp"
                     android:src="@drawable/left" />
-
 
             <LinearLayout
                 android:layout_marginTop="16dp"
@@ -80,7 +78,7 @@
                 android:id="@+id/rv_acceptedRecipe"
                 android:layout_below="@id/text_trend"
                 android:layout_width="match_parent"
-                android:layout_height="138dp"/>
+                android:layout_height="160dp"/>
 
             <TextView
                 android:layout_marginTop="16dp"

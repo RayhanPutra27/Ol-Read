@@ -25,10 +25,11 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
+                    android:id="@+id/img_back"
                     android:layout_centerVertical="true"
                     android:layout_width="42dp"
                     android:layout_height="32dp"
-                    android:src="@drawable/nav" />
+                    android:src="@drawable/left" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/img_profile"

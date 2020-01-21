@@ -35,7 +35,12 @@ class FavoriteActivity : AppCompatActivity() {
         GlideApp.with(this@FavoriteActivity)
             .load(sharedPref!!.getStringSharedPreferences(ConstantUtils.PROFIL))
             .into(img_profile)
+
         txt_user.text = sharedPref!!.getStringSharedPreferences(ConstantUtils.USERNAME)
+
+        img_back.setOnClickListener {
+            finish()
+        }
     }
 
     private fun setRecipe(user_id: Int) {

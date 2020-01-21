@@ -7,24 +7,29 @@ import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_category.*
 import kotlinx.android.synthetic.main.activity_search.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import rpl.ezy.olread.GlideApp
 import rpl.ezy.olread.R
 import rpl.ezy.olread.adapter.AcceptedRecipesAdapter
 import rpl.ezy.olread.api.GetDataService
 import rpl.ezy.olread.api.RetrofitClientInstance
 import rpl.ezy.olread.response.ResponseRecipes
+import rpl.ezy.olread.utils.ConstantUtils
+import rpl.ezy.olread.utils.SharedPreferenceUtils
 
 class SearchActivity : AppCompatActivity() {
+
+    var sharedPref: SharedPreferenceUtils? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
+
+        sharedPref = SharedPreferenceUtils(this@SearchActivity)
 
         setRecyclerNull()
         val window = this.window
@@ -51,6 +56,15 @@ class SearchActivity : AppCompatActivity() {
             }
 
         })
+
+        GlideApp.with(this@SearchActivity)
+            .load(sharedPref!!.getStringSharedPreferences(ConstantUtils.PROFIL))
+            .into(profile_search)
+
+        img_back.setOnClickListener {
+            finish()
+        }
+
     }
 
 
