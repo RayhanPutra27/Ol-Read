@@ -1,9 +1,15 @@
 package rpl.ezy.olread.view.auth
 
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
@@ -13,7 +19,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
+import de.hdodenhof.circleimageview.CircleImageView
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,7 +39,12 @@ import rpl.ezy.olread.utils.ConstantUtils.USER
 import rpl.ezy.olread.utils.ConstantUtils.USERNAME
 import rpl.ezy.olread.utils.ConstantUtils.USER_ID
 import rpl.ezy.olread.utils.SharedPreferenceUtils
+import rpl.ezy.olread.view.user.AddRecipesActivity
 import rpl.ezy.olread.view.user.UserActivity
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 /**
  * A simple [Fragment] subclass.
@@ -40,6 +56,8 @@ class SignupFragment : Fragment() {
     var etUsername: EditText? = null
     var etEmail: EditText? = null
     var etPassword: EditText? = null
+    var imgProfile: CircleImageView? = null
+    private lateinit var imageData: MultipartBody.Part
 
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle? ): View? {
@@ -51,6 +69,24 @@ class SignupFragment : Fragment() {
         etUsername = view.findViewById(R.id.et_username_reg)
         etEmail = view.findViewById(R.id.et_email_reg)
         etPassword = view.findViewById(R.id.et_pass_reg)
+        imgProfile = view.findViewById(R.id.nav_profile)
+        imgProfile!!.setOnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (checkSelfPermission(context!!, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED
+                ) {
+                    //permission denied
+                    val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    //show popup to request runtime permission
+                    requestPermissions(permissions, PERMISSION_CODE)
+                } else {
+                    //permission already granted
+                    pickImageFromGallery()
+                }
+            } else {
+                //system OS is < Marshmallow
+                pickImageFromGallery()
+            }
+        }
 
         signup()
         val window = activity!!.window
@@ -63,8 +99,12 @@ class SignupFragment : Fragment() {
 
         sharedPreferences = SharedPreferenceUtils(context!!)
         btnSignup?.setOnClickListener {
+            val username = RequestBody.create(MediaType.parse("multipart/form-data"), etUsername!!.getText().toString())
+            val email = RequestBody.create(MediaType.parse("multipart/form-data"), etEmail!!.getText().toString())
+            val password = RequestBody.create(MediaType.parse("multipart/form-data"), etPassword!!.getText().toString())
+            val user = RequestBody.create(MediaType.parse("multipart/form-data"), USER.toString())
             if (ValidationSignup()){
-                ResponseSignup( etUsername?.text.toString(), etEmail?.text.toString(), etPassword?.text.toString() )
+                ResponseSignup( username, email, password, user )
             }
         }
     }
@@ -99,10 +139,10 @@ class SignupFragment : Fragment() {
         return true
     }
 
-    private fun ResponseSignup(username: String, email: String, pass: String){
+    private fun ResponseSignup(username: RequestBody, email: RequestBody, pass: RequestBody, user: RequestBody){
         val service =
             RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
-        val call = service.userSignup(username, email, pass, USER)
+        val call = service.userSignup(username, email, pass, user, imageData)
         call.enqueue(object : Callback<ResponseSignup> {
             override fun onFailure(call: Call<ResponseSignup>, t: Throwable) {
                 Toast.makeText(
@@ -114,7 +154,7 @@ class SignupFragment : Fragment() {
             }
 
             override fun onResponse(call: Call<ResponseSignup>,response: Response<ResponseSignup>) {
-                if (response.body()!!.status == 200){
+                if (response.isSuccessful){
                     Toast.makeText(
                         context,
                         response.body()!!.message,
@@ -149,6 +189,79 @@ class SignupFragment : Fragment() {
         } else {
             sharedPreferences!!.setSharedPreferences(key, int)
         }
+    }
+
+    private fun pickImageFromGallery() {
+        //Intent to pick image
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_PICK_CODE)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when(requestCode){
+            PERMISSION_CODE -> {
+                if (grantResults.size >0 && grantResults[0] ==
+                    PackageManager.PERMISSION_GRANTED){
+                    //permission from popup granted
+                    pickImageFromGallery()
+                }
+                else{
+                    //permission from popup denied
+                    Toast.makeText(context, "Permission denied", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun createTempFile(bitmap: Bitmap): File {
+        val file = File(
+            context!!.getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+            System.currentTimeMillis().toString() + "_image.jpg"
+        )
+        val bos = ByteArrayOutputStream()
+
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos)
+        val bitmapdata = bos.toByteArray()
+
+        try {
+            val fos = FileOutputStream(file)
+            fos.write(bitmapdata)
+            fos.flush()
+            fos.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+        return file
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
+//            val mphoto = data.extras.get("") as Bitmap
+            val imageUri = data!!.data
+            val bitmap = MediaStore.Images.Media.getBitmap(context!!.contentResolver, imageUri)
+            uploadImage(bitmap)
+            imgProfile!!.setImageURI(imageUri)
+
+            Log.d("IMAGEURI", "$imageUri")
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun uploadImage(bitmap: Bitmap) {
+        val file = createTempFile(bitmap)
+        val reqFile = RequestBody.create(MediaType.parse("image/*"), file)
+        val body = MultipartBody.Part.createFormData("profil", file.name, reqFile)
+        imageData = body
+
+    }
+
+    companion object {
+        //image pick code
+        private val IMAGE_PICK_CODE = 1000
+        //Permission code
+        private val PERMISSION_CODE = 1001
     }
 
 }

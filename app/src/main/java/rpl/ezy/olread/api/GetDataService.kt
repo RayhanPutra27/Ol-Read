@@ -4,9 +4,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
-import rpl.ezy.olread.model.MRecipe
 import rpl.ezy.olread.response.*
-import java.io.File
 
 
 interface GetDataService {
@@ -23,13 +21,14 @@ interface GetDataService {
         @Field("password") password: String
     ): Call<ResponseLogin>
 
-    @FormUrlEncoded
+    @Multipart
     @POST("users/signup")
     fun userSignup(
-        @Field("username") username: String,
-        @Field("email") email: String,
-        @Field("password") password: String,
-        @Field("status") status: Int
+        @Part("username") user_id: RequestBody,
+        @Part("email") title: RequestBody,
+        @Part("email") recipe: RequestBody,
+        @Part("status") kategori: RequestBody,
+        @Part profil: MultipartBody.Part
     ): Call<ResponseSignup>
 
     @GET("users/{user_id}")
