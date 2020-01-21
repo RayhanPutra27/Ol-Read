@@ -12,7 +12,7 @@ class RetrofitClientInstance {
 
             var retrofit = Retrofit.Builder()
 //                .baseUrl("http://192.168.43.193:3000")
-                .baseUrl("http://192.168.43.193/lumen/olrecipe/")
+                .baseUrl("http://192.168.20.197:8000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 //        }

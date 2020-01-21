@@ -171,9 +171,12 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/addRecipe"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp"
         android:paddingHorizontal="24dp"
         android:orientation="horizontal"
         android:paddingVertical="8dp"

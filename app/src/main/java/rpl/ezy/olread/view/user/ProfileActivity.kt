@@ -1,5 +1,6 @@
 package rpl.ezy.olread.view.user
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -49,6 +50,9 @@ class ProfileActivity : AppCompatActivity() {
 
         img_back.setOnClickListener {
             finish()
+        }
+        addRecipe.setOnClickListener {
+            startActivity(Intent(this@ProfileActivity, AddRecipesActivity::class.java))
         }
 
     }
