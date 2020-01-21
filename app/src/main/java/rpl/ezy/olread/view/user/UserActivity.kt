@@ -41,12 +41,14 @@ class UserActivity : AppCompatActivity() {
         setContentView(R.layout.activity_user)
 
         sharedPreferences = SharedPreferenceUtils(this@UserActivity)
-        GlideApp.with(this@UserActivity)
-            .load(sharedPreferences!!.getStringSharedPreferences(ConstantUtils.PROFIL))
-            .into(img_profile)
-        GlideApp.with(this@UserActivity)
-            .load(sharedPreferences!!.getStringSharedPreferences(ConstantUtils.PROFIL))
-            .into(nav_profile)
+        if(sharedPreferences!!.getStringSharedPreferences(ConstantUtils.PROFIL) != ""){
+            GlideApp.with(this@UserActivity)
+                .load(sharedPreferences!!.getStringSharedPreferences(ConstantUtils.PROFIL))
+                .into(img_profile)
+            GlideApp.with(this@UserActivity)
+                .load(sharedPreferences!!.getStringSharedPreferences(ConstantUtils.PROFIL))
+                .into(nav_profile)
+        }
         txt_user.text = sharedPreferences!!.getStringSharedPreferences(ConstantUtils.USERNAME)
 
         setRecyclerTrends()
@@ -101,16 +103,30 @@ class UserActivity : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call<ResponseRecipes>, response: Response<ResponseRecipes>) {
-                if (response.body()!!.status == 200){
-                    var data = response.body()!!.data
+                if(response.isSuccessful){
+                    if (response.body()!!.status == 200){
+                        var data = response.body()!!.data
 
-                    var mAdapter = AcceptedRecipesAdapter(this@UserActivity, data)
+                        var mAdapter = AcceptedRecipesAdapter(this@UserActivity, data)
 
-                    recycler_menu.apply {
-                        layoutManager = LinearLayoutManager(this@UserActivity)
-                        adapter = mAdapter
+                        recycler_menu.apply {
+                            layoutManager = LinearLayoutManager(this@UserActivity)
+                            adapter = mAdapter
+                        }
+
+                    } else {
+                        Toast.makeText(
+                            this@UserActivity,
+                            response.body()!!.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
-
+                } else {
+                    Toast.makeText(
+                        this@UserActivity,
+                        "Ada kesalahan server",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         })
@@ -130,13 +146,27 @@ class UserActivity : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call<ResponseRecipes>,response: Response<ResponseRecipes>) {
-                if(response.body()!!.status == 200) {
-                    var data = response.body()!!.data
-                    var mAdapter = CategoryAdapter(this@UserActivity, data)
-                    recycler_category.apply {
-                        layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.HORIZONTAL, false)
-                        adapter = mAdapter
+                if(response.isSuccessful){
+                    if(response.body()!!.status == 200) {
+                        var data = response.body()!!.data
+                        var mAdapter = CategoryAdapter(this@UserActivity, data)
+                        recycler_category.apply {
+                            layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.HORIZONTAL, false)
+                            adapter = mAdapter
+                        }
+                    } else {
+                        Toast.makeText(
+                            this@UserActivity,
+                            response.body()!!.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
+                } else {
+                    Toast.makeText(
+                        this@UserActivity,
+                        "Ada kesalahan server",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 
@@ -159,16 +189,30 @@ class UserActivity : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call<ResponseRecipes>, response: Response<ResponseRecipes>) {
-                if (response.body()!!.status == 200){
-                    var data = response.body()!!.data
+                if(response.isSuccessful){
+                    if (response.body()!!.status == 200){
+                        var data = response.body()!!.data
 
-                    val mAdapter = RecyclerAcceptedRecipesAdapter(this@UserActivity, data)
+                        val mAdapter = RecyclerAcceptedRecipesAdapter(this@UserActivity, data)
 
-                    recycler_trend.apply {
-                        layoutManager = LinearLayoutManager(this@UserActivity, LinearLayoutManager.HORIZONTAL, false)
-                        adapter = mAdapter
+                        recycler_trend.apply {
+                            layoutManager = LinearLayoutManager(this@UserActivity, LinearLayoutManager.HORIZONTAL, false)
+                            adapter = mAdapter
+                        }
+
+                    } else {
+                        Toast.makeText(
+                            this@UserActivity,
+                            response.body()!!.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
-
+                } else {
+                    Toast.makeText(
+                        this@UserActivity,
+                        "Ada kesalahan server",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         })

@@ -37,8 +37,12 @@ class ArchiveActivity : AppCompatActivity() {
         GlideApp.with(this@ArchiveActivity)
             .load(sharedPref!!.getStringSharedPreferences(PROFIL))
             .into(img_profile)
+
         txt_user.text = sharedPref!!.getStringSharedPreferences(USERNAME)
 
+        img_back.setOnClickListener {
+            finish()
+        }
     }
 
     private fun setRecipe(user_id: Int) {

@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F6F6F6"
+    android:background="#ECECEC"
     tools:ignore="UnusedAttribute, ContentDescription , ObsoleteLayoutParam"
     tools:context=".view.user.ProfileActivity">
 
     <ImageView
         android:id="@+id/img_back"
-        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="8dp"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:src="@drawable/left"/>

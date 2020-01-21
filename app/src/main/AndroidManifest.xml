@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.user.AddRecipesActivity"></activity>
+        <activity android:name=".view.user.EditProfile"></activity>
+        <activity android:name=".view.user.AddRecipesActivity" />
         <activity android:name=".view.user.ArchiveActivity" />
         <activity android:name=".view.user.SearchActivity" />
         <activity android:name=".view.user.CategoryActivity" />

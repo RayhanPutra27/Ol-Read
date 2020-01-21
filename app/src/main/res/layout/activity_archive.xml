@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.user.UserActivity"
+    tools:context=".view.user.ArchiveActivity"
     tools:ignore="UnusedAttribute,ContentDescription,RtlHardcoded">
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -25,10 +25,11 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
+                    android:id="@+id/img_back"
                     android:layout_centerVertical="true"
                     android:layout_width="42dp"
                     android:layout_height="32dp"
-                    android:src="@drawable/nav" />
+                    android:src="@drawable/left" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/img_profile"

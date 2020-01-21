@@ -25,16 +25,18 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
+                    android:id="@+id/img_back"
                     android:layout_centerVertical="true"
                     android:layout_width="42dp"
                     android:layout_height="32dp"
-                    android:src="@drawable/nav" />
+                    android:src="@drawable/left" />
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_search"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:background="@drawable/custom_item_category"
-                    android:layout_alignParentRight="true"/>
+                    android:layout_alignParentRight="true" />
 
             </RelativeLayout>
 

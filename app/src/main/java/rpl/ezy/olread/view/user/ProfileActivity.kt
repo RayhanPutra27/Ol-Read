@@ -7,8 +7,6 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_archive.*
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.activity_profile.img_profile
 import retrofit2.Call
@@ -16,11 +14,10 @@ import retrofit2.Callback
 import retrofit2.Response
 import rpl.ezy.olread.GlideApp
 import rpl.ezy.olread.R
-import rpl.ezy.olread.adapter.AcceptedRecipesAdapter
+import rpl.ezy.olread.adapter.RecyclerAcceptedRecipesAdapter
 import rpl.ezy.olread.api.GetDataService
 import rpl.ezy.olread.api.RetrofitClientInstance
 import rpl.ezy.olread.response.ResponseRecipes
-import rpl.ezy.olread.utils.ConstantUtils
 import rpl.ezy.olread.utils.ConstantUtils.PROFIL
 import rpl.ezy.olread.utils.ConstantUtils.USERNAME
 import rpl.ezy.olread.utils.ConstantUtils.USER_ID
@@ -42,6 +39,10 @@ class ProfileActivity : AppCompatActivity() {
         GlideApp.with(this@ProfileActivity)
             .load(sharedPreference!!.getStringSharedPreferences(PROFIL))
             .into(img_profile)
+
+        img_profile.setOnClickListener {
+            startActivity(Intent(this, EditProfile::class.java).putExtra(PROFIL, sharedPreference!!.getStringSharedPreferences(PROFIL)))
+        }
 
         name.text = sharedPreference!!.getStringSharedPreferences(USERNAME)
 
@@ -76,8 +77,8 @@ class ProfileActivity : AppCompatActivity() {
                     total_post.text = "${response.body()!!.data.size}"
 
                     recycler_post.apply {
-                        layoutManager = LinearLayoutManager(this@ProfileActivity)
-                        adapter = AcceptedRecipesAdapter(this@ProfileActivity, response.body()!!.data)
+                        layoutManager = LinearLayoutManager(this@ProfileActivity, LinearLayoutManager.HORIZONTAL, false)
+                        adapter = RecyclerAcceptedRecipesAdapter(this@ProfileActivity, response.body()!!.data)
                     }
                 }
             }

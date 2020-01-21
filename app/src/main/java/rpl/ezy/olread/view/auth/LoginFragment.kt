@@ -87,29 +87,37 @@ class LoginFragment : Fragment() {
             override fun onResponse(call: Call<ResponseLogin>, response: Response<ResponseLogin>) {
                 if(response.isSuccessful){
                     if (response.isSuccessful){
-                        Toast.makeText(
-                            context,
-                            response.body()!!.message,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        if( response.body()!!.status == 200){
+                            Toast.makeText(
+                                context,
+                                response.body()!!.message,
+                                Toast.LENGTH_SHORT
+                            ).show()
 
-                        var data = response.body()!!.data
+                            var data = response.body()!!.data
 
-                        SetDataUser(USER_ID, data.user_id, "")
-                        SetDataUser(USERNAME, 0, data.username)
-                        SetDataUser(EMAIL, 0, data.email)
-                        SetDataUser(PROFIL, 0, data.profil)
+                            SetDataUser(USER_ID, data.user_id, "")
+                            SetDataUser(USERNAME, 0, data.username)
+                            SetDataUser(EMAIL, 0, data.email)
+                            SetDataUser(PROFIL, 0, data.profil)
 
-                        if (data.status == ADMIN){
-                            SetDataUser(STATUS, ADMIN, "")
-                            startActivity(Intent(context, AdminActivity::class.java))
+                            if (data.status == ADMIN){
+                                SetDataUser(STATUS, ADMIN, "")
+                                startActivity(Intent(context, AdminActivity::class.java))
+                                (context as Activity).finish()
+                                return
+                            }
+
+                            SetDataUser(STATUS, USER, "")
+                            startActivity(Intent(context, UserActivity::class.java))
                             (context as Activity).finish()
-                            return
+                        } else {
+                            Toast.makeText(
+                                context,
+                                response.body()!!.message,
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
-
-                        SetDataUser(STATUS, USER, "")
-                        startActivity(Intent(context, UserActivity::class.java))
-                        (context as Activity).finish()
                     } else {
                         Toast.makeText(
                             context,

@@ -12,6 +12,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import rpl.ezy.olread.R
+import rpl.ezy.olread.adapter.AcceptedRecipesAdapter
 import rpl.ezy.olread.adapter.RecyclerAcceptedRecipesAdapter
 import rpl.ezy.olread.adapter.RecyclerUnAcceptedRecipesAdapter
 import rpl.ezy.olread.api.GetDataService
@@ -89,7 +90,7 @@ class AdminActivity : AppCompatActivity() {
                 if (response.body()!!.status == 200){
                     val data = response.body()!!.data
 
-                    val mAdapter = RecyclerUnAcceptedRecipesAdapter(this@AdminActivity, data)
+                    val mAdapter = AcceptedRecipesAdapter(this@AdminActivity, data)
 
                     rv_unAcceptedRecipes.apply {
                         layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
