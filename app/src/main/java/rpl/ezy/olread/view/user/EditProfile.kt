@@ -22,7 +22,7 @@ class EditProfile : AppCompatActivity() {
             profile = intent.getStringExtra(PROFIL)
 
             GlideApp.with(this@EditProfile)
-                .load(sharedPreference!!.getStringSharedPreferences(PROFIL))
+                .load(profile)
                 .into(image_profile)
         }
 

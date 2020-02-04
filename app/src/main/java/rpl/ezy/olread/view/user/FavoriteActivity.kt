@@ -41,6 +41,16 @@ class FavoriteActivity : AppCompatActivity() {
         img_back.setOnClickListener {
             finish()
         }
+        setToolbar()
+    }
+
+    private fun setToolbar() {
+        setSupportActionBar(toolbar)
+        toolbar.navigationIcon = resources.getDrawable(R.drawable.back_black)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        toolbar.setNavigationOnClickListener {
+            finish()
+        }
     }
 
     private fun setRecipe(user_id: Int) {

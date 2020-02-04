@@ -34,9 +34,9 @@ class AcceptedRecipesAdapter(var mContext: Context, var data: ArrayList<MRecipe>
             .into(holder.img_item)
         holder.tv_title.text = data[position].title
         holder.tv_kategori.text = data[position].kategori
-        if(data[position].like != 0){
+//        if(data[position].like != 0){
             holder.tv_like.text = "${data[position].like} likes"
-        }
+//        }
 
         Log.d("TES_RECIPES", "${data[position].recipe}")
 

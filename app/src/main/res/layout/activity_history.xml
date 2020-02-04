@@ -12,41 +12,39 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ECECEC"
-            android:paddingTop="16dp"
-            android:paddingHorizontal="16dp">
+            android:background="#ECECEC">
 
-            <RelativeLayout
-                android:id="@+id/header"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="?attr/actionBarSize"
+                android:background="#ECECEC">
 
-                <ImageView
-                    android:id="@+id/img_back"
-                    android:layout_centerVertical="true"
-                    android:layout_width="42dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/left" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_history"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:background="@drawable/custom_item_category"
-                    android:layout_alignParentRight="true" />
-
-            </RelativeLayout>
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profile_history"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/custom_item_category" />
+                </RelativeLayout>
+            </androidx.appcompat.widget.Toolbar>
 
             <LinearLayout
-                android:layout_marginTop="16dp"
                 android:id="@+id/text_header"
-                android:layout_below="@+id/header"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_below="@id/toolbar"
+                android:paddingHorizontal="16dp"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -56,45 +54,46 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_bold"
                         android:text="Hallo"
                         android:textSize="24sp"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/lato_bold"/>
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:layout_marginStart="8dp"
                         android:id="@+id/txt_user"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/lato_bold"
                         android:text="User"
-                        android:textStyle="bold"
                         android:textSize="24sp"
-                        android:fontFamily="@font/lato_bold"/>
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_light"
                     android:text="Ini adalah History masakanmu !"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/lato_light"/>
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
             <RelativeLayout
-                android:layout_marginTop="16dp"
-                android:layout_below="@+id/text_header"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_below="@+id/text_header"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/custom_item_horizontal"
                 android:paddingHorizontal="16dp"
-                android:paddingTop="16dp"
-                android:background="@drawable/custom_item_horizontal">
+                android:layout_marginHorizontal="16dp"
+                android:paddingTop="16dp">
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_history"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/recycler_history"/>
+                    android:layout_height="wrap_content" />
 
             </RelativeLayout>
 

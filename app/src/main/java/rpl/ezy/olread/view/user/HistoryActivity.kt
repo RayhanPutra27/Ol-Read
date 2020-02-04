@@ -21,14 +21,20 @@ class HistoryActivity : AppCompatActivity() {
         window.statusBarColor = ContextCompat.getColor(this, R.color.green_1)
         sharedPref = SharedPreferenceUtils(this@HistoryActivity)
 
-        img_back.setOnClickListener {
-            finish()
-        }
-
         GlideApp.with(this@HistoryActivity)
             .load(sharedPref!!.getStringSharedPreferences(ConstantUtils.PROFIL))
             .into(profile_history)
 
         txt_user.text = sharedPref!!.getStringSharedPreferences(USERNAME)
+        setToolbar()
+    }
+
+    private fun setToolbar() {
+        setSupportActionBar(toolbar)
+        toolbar.navigationIcon = resources.getDrawable(R.drawable.back_black)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        toolbar.setNavigationOnClickListener {
+            finish()
+        }
     }
 }

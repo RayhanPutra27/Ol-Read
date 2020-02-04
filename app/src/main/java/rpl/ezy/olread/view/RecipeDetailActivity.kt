@@ -1,5 +1,6 @@
 package rpl.ezy.olread.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -19,9 +20,11 @@ import rpl.ezy.olread.model.MRecipe
 import rpl.ezy.olread.response.ResponseRecipes
 import rpl.ezy.olread.response.ResponseRecipeById
 import rpl.ezy.olread.utils.ConstantUtils
+import rpl.ezy.olread.utils.ConstantUtils.PROFIL
 import rpl.ezy.olread.utils.ConstantUtils.RECIPE_ID
 import rpl.ezy.olread.utils.ConstantUtils.USER_ID
 import rpl.ezy.olread.utils.SharedPreferenceUtils
+import rpl.ezy.olread.view.user.EditProfile
 
 class RecipeDetailActivity : AppCompatActivity() {
 
@@ -184,6 +187,10 @@ class RecipeDetailActivity : AppCompatActivity() {
                     confirmRecipe(recipe_id)
                 }
 
+                img_item.setOnClickListener {
+                    startActivity(Intent(this@RecipeDetailActivity, EditProfile::class.java).putExtra(PROFIL, dataRecipe.img_url))
+                }
+
                 getArchive(dataRecipe)
                 getLike(dataRecipe)
 
@@ -205,12 +212,28 @@ class RecipeDetailActivity : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call<ResponseRecipes>,response: Response<ResponseRecipes>) {
-                Toast.makeText(
-                    this@RecipeDetailActivity,
-                    response.body()!!.message,
-                    Toast.LENGTH_SHORT
-                ).show()
-                finish()
+                if(response.isSuccessful){
+                    if(response.body()!!.status == 200){
+                        Toast.makeText(
+                            this@RecipeDetailActivity,
+                            response.body()!!.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        finish()
+                    } else {
+                        Toast.makeText(
+                            this@RecipeDetailActivity,
+                            response.body()!!.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                } else {
+                    Toast.makeText(
+                        this@RecipeDetailActivity,
+                        "Ada kesalahan server",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
 
         })

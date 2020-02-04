@@ -3,6 +3,7 @@ package rpl.ezy.olread.view.auth
 
 import android.Manifest
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -57,6 +58,7 @@ class SignupFragment : Fragment() {
     var etEmail: EditText? = null
     var etPassword: EditText? = null
     var imgProfile: CircleImageView? = null
+    var loading: ProgressDialog? = null
     private lateinit var imageData: MultipartBody.Part
 
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?,
@@ -70,6 +72,9 @@ class SignupFragment : Fragment() {
         etEmail = view.findViewById(R.id.et_email_reg)
         etPassword = view.findViewById(R.id.et_pass_reg)
         imgProfile = view.findViewById(R.id.nav_profile)
+        loading = ProgressDialog(context!!)
+        loading!!.setCancelable(false)
+
         imgProfile!!.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (checkSelfPermission(context!!, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED
@@ -140,11 +145,14 @@ class SignupFragment : Fragment() {
     }
 
     private fun ResponseSignup(username: RequestBody, email: RequestBody, pass: RequestBody, user: RequestBody){
+        loading!!.setMessage("Loading ...")
+        loading!!.show()
         val service =
             RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
         val call = service.userSignup(username, email, pass, user, imageData)
         call.enqueue(object : Callback<ResponseSignup> {
             override fun onFailure(call: Call<ResponseSignup>, t: Throwable) {
+                loading!!.cancel()
                 Toast.makeText(
                     context,
                     "Something went wrong...Please try later!",
@@ -154,27 +162,36 @@ class SignupFragment : Fragment() {
             }
 
             override fun onResponse(call: Call<ResponseSignup>,response: Response<ResponseSignup>) {
-                if (response.isSuccessful){
-                    Toast.makeText(
-                        context,
-                        response.body()!!.message,
-                        Toast.LENGTH_SHORT
-                    ).show()
+                loading!!.cancel()
+                if (response.isSuccessful) {
+                    if(response.body()!!.status == 200){
+                        Toast.makeText(
+                            context,
+                            response.body()!!.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
 
-                    var data = response.body()!!.data
+                        var data = response.body()!!.data
 
-                    SetDataUser(USER_ID, data.user_id, "")
-                    SetDataUser(USERNAME, 0, data.username)
-                    SetDataUser(EMAIL, 0, data.email)
-                    SetDataUser(PROFIL, 0, data.profil)
-                    SetDataUser(STATUS, USER, "")
+                        SetDataUser(USER_ID, data.user_id, "")
+                        SetDataUser(USERNAME, 0, data.username)
+                        SetDataUser(EMAIL, 0, data.email)
+                        SetDataUser(PROFIL, 0, data.profil)
+                        SetDataUser(STATUS, USER, "")
 
-                    startActivity(Intent(context, UserActivity::class.java))
-                    (context as Activity).finish()
+                        startActivity(Intent(context, UserActivity::class.java))
+                        (context as Activity).finish()
+                    } else {
+                        Toast.makeText(
+                            context,
+                            response.body()!!.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 } else {
                     Toast.makeText(
                         context,
-                        response.body()!!.message,
+                        "Ada kesalahan server",
                         Toast.LENGTH_SHORT
                     ).show()
                 }

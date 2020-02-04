@@ -24,10 +24,10 @@ interface GetDataService {
     @Multipart
     @POST("users/signup")
     fun userSignup(
-        @Part("username") user_id: RequestBody,
-        @Part("email") title: RequestBody,
-        @Part("email") recipe: RequestBody,
-        @Part("status") kategori: RequestBody,
+        @Part("username") username: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("password") password: RequestBody,
+        @Part("status") status: RequestBody,
         @Part profil: MultipartBody.Part
     ): Call<ResponseSignup>
 
@@ -48,7 +48,7 @@ interface GetDataService {
     @GET("recipes/{recipe_id}")
     fun getRecipeById(@Path("recipe_id") recipe_id: Int): Call<ResponseRecipeById>
 
-    @PUT("recipes/confirm/{recipes_id}")
+    @GET("recipes/confirm/{recipes_id}")
     fun confirmRecipes(@Path("recipes_id") recipe_id: Int): Call<ResponseRecipes>
 
     @GET("recipes/kategori")

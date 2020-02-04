@@ -2,6 +2,7 @@ package rpl.ezy.olread.view.auth
 
 
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -43,6 +44,7 @@ class LoginFragment : Fragment() {
     var btnLogin: Button? = null
     var etEmail: EditText? = null
     var etPassword: EditText? = null
+    var loading: ProgressDialog? = null
 
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle? ): View? {
@@ -52,6 +54,8 @@ class LoginFragment : Fragment() {
         btnLogin = view.findViewById(R.id.bt_login)
         etEmail = view.findViewById(R.id.et_email)
         etPassword = view.findViewById(R.id.et_pass)
+        loading = ProgressDialog(context!!)
+        loading!!.setCancelable(false)
 
         login()
         val window = activity!!.window
@@ -71,11 +75,14 @@ class LoginFragment : Fragment() {
     }
 
     fun ResponseLogin(email: String, pass: String) {
+        loading!!.setMessage("Loading ...")
+        loading!!.show()
         val service =
             RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
         val call = service.userLogin(email, pass)
         call.enqueue(object : Callback<ResponseLogin> {
             override fun onFailure(call: Call<ResponseLogin>, t: Throwable) {
+                loading!!.cancel()
                 Toast.makeText(
                     context,
                     "Something went wrong...Please try later!",
@@ -85,7 +92,7 @@ class LoginFragment : Fragment() {
             }
 
             override fun onResponse(call: Call<ResponseLogin>, response: Response<ResponseLogin>) {
-                if(response.isSuccessful){
+                loading!!.cancel()
                     if (response.isSuccessful){
                         if( response.body()!!.status == 200){
                             Toast.makeText(
@@ -121,21 +128,10 @@ class LoginFragment : Fragment() {
                     } else {
                         Toast.makeText(
                             context,
-                            response.body()!!.message,
+                            "Ada kesalahan server",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                } else {
-                    Toast.makeText(
-                        context,
-                        "Ada kesalahan",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    Log.d("LOGLOGLOGAN", "${response.errorBody()}")
-                    Log.d("LOGLOGLOGAN", "${response.message()}")
-                    Log.d("LOGLOGLOGAN", "${response.code()}")
-                    Log.d("LOGLOGLOGAN", "${response.raw()}")
-                }
             }
 
         })

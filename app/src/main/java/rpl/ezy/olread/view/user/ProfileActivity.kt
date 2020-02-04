@@ -30,6 +30,7 @@ class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+        setToolbar()
 
         val window = this.window
         window.statusBarColor = ContextCompat.getColor(this, R.color.green_1)
@@ -84,6 +85,15 @@ class ProfileActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun setToolbar() {
+        setSupportActionBar(toolbar)
+        toolbar.navigationIcon = resources.getDrawable(R.drawable.back_black)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        toolbar.setNavigationOnClickListener {
+            finish()
+        }
     }
 
     private fun setArchive(user_id: Int) {

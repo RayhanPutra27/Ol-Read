@@ -4,11 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_archive.*
-import kotlinx.android.synthetic.main.activity_favorite.*
 import kotlinx.android.synthetic.main.activity_user.*
 import kotlinx.android.synthetic.main.activity_user.img_profile
 import kotlinx.android.synthetic.main.activity_user.txt_user
@@ -31,6 +29,9 @@ import rpl.ezy.olread.response.ResponseUsers
 import rpl.ezy.olread.utils.ConstantUtils
 import rpl.ezy.olread.utils.SharedPreferenceUtils
 import rpl.ezy.olread.view.auth.Authentification
+import androidx.core.view.GravityCompat
+
+
 
 class UserActivity : AppCompatActivity() {
 
@@ -39,6 +40,10 @@ class UserActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        supportActionBar!!.setHomeAsUpIndicator(R.drawable.nav)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         sharedPreferences = SharedPreferenceUtils(this@UserActivity)
         if(sharedPreferences!!.getStringSharedPreferences(ConstantUtils.PROFIL) != ""){
@@ -80,7 +85,19 @@ class UserActivity : AppCompatActivity() {
         }
     }
 
-     private fun actionLogout() {
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val itemId = item!!.itemId
+        when (itemId) {
+            // Android home
+            android.R.id.home -> {
+                drawer_layout.openDrawer(GravityCompat.START)
+                return true
+            }
+        }// manage other entries if you have it ...
+        return true
+    }
+
+    private fun actionLogout() {
         sharedPreferences!!.setSharedPreferences(ConstantUtils.USER_ID, -1)
         sharedPreferences!!.setSharedPreferences(ConstantUtils.USERNAME, "")
         sharedPreferences!!.setSharedPreferences(ConstantUtils.EMAIL, "")
