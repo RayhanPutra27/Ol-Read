@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
-import rpl.ezy.olread.MainActivity
 import kotlinx.android.synthetic.main.activity_authentification.*
 import rpl.ezy.olread.R
 import rpl.ezy.olread.adapter.PagerAdapter
@@ -13,7 +12,8 @@ import rpl.ezy.olread.utils.ConstantUtils.STATUS
 import rpl.ezy.olread.utils.ConstantUtils.USER
 import rpl.ezy.olread.utils.ConstantUtils.USER_ID
 import rpl.ezy.olread.utils.SharedPreferenceUtils
-import rpl.ezy.olread.view.admin.AdminActivity
+import rpl.ezy.olread.view.admin.AcceptActivity
+import rpl.ezy.olread.view.admin.DashboardActivity
 import rpl.ezy.olread.view.user.UserActivity
 
 
@@ -29,7 +29,7 @@ class Authentification : AppCompatActivity() {
 
         if (sharedPreferences!!.getIntSharedPreferences(USER_ID) != -1){
             if (sharedPreferences!!.getIntSharedPreferences(STATUS) == ADMIN){
-                startActivity(Intent(this@Authentification, AdminActivity::class.java))
+                startActivity(Intent(this@Authentification, DashboardActivity::class.java))
                 finish()
                 return
             }

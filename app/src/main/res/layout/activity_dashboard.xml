@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="16dp"
+    android:background="#ECECEC"
+    tools:context=".view.admin.DashboardActivity"
+    tools:ignore="UnusedAttribute, RtlSymmetry">
+
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:id="@+id/txt_admin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/bt_logout"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:src="@drawable/signout" />
+
+        <TextView
+            android:layout_marginStart="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hallo"
+            android:layout_gravity="center_vertical"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/lato_bold"/>
+
+        <TextView
+            android:layout_marginStart="8dp"
+            android:id="@+id/txt_user"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Admin"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:fontFamily="@font/lato_bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/txt_admin"
+        android:id="@+id/dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="24dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingEnd="8dp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_acc"
+                android:layout_width="match_parent"
+                android:layout_height="349dp"
+                app:cardBackgroundColor="#8AA27D"
+                app:cardCornerRadius="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="16dp">
+
+                    <TextView
+                        android:id="@+id/txt_acc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/lato_bold"
+                        android:gravity="center_horizontal"
+                        android:text="Recipe Accept"
+                        android:textColor="#FFFFFF"
+                        android:textSize="30sp" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_req"
+                android:layout_width="match_parent"
+                android:layout_height="260dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="#FF5E7240"
+                app:cardCornerRadius="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="16dp">
+
+                    <TextView
+                        android:id="@+id/txt_req"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/lato_bold"
+                        android:gravity="center_horizontal"
+                        android:text="Request"
+                        android:textColor="#FFFFFF"
+                        android:textSize="32sp" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingStart="8dp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_manage"
+                android:layout_width="match_parent"
+                android:layout_height="260dp"
+                app:cardBackgroundColor="#FF5E7240"
+                app:cardCornerRadius="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="16dp">
+
+                    <TextView
+                        android:id="@+id/txt_manage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_bold"
+                        android:gravity="center_horizontal"
+                        android:text="Manage User"
+                        android:textColor="#FFFFFF"
+                        android:textSize="28sp" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_reject"
+                android:layout_width="match_parent"
+                android:layout_height="349dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="#8AA27D"
+                app:cardCornerRadius="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="16dp">
+
+                    <TextView
+                        android:id="@+id/txt_reject"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/lato_bold"
+                        android:gravity="center_horizontal"
+                        android:text="Recipe Reject"
+                        android:textColor="#FFFFFF"
+                        android:textSize="32sp" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

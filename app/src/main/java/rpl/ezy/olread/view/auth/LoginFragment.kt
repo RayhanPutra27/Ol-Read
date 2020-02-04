@@ -18,7 +18,6 @@ import androidx.core.content.ContextCompat
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import rpl.ezy.olread.MainActivity
 
 import rpl.ezy.olread.R
 import rpl.ezy.olread.api.GetDataService
@@ -32,7 +31,8 @@ import rpl.ezy.olread.utils.ConstantUtils.USER
 import rpl.ezy.olread.utils.ConstantUtils.USERNAME
 import rpl.ezy.olread.utils.ConstantUtils.USER_ID
 import rpl.ezy.olread.utils.SharedPreferenceUtils
-import rpl.ezy.olread.view.admin.AdminActivity
+import rpl.ezy.olread.view.admin.AcceptActivity
+import rpl.ezy.olread.view.admin.DashboardActivity
 import rpl.ezy.olread.view.user.UserActivity
 
 /**
@@ -110,7 +110,7 @@ class LoginFragment : Fragment() {
 
                             if (data.status == ADMIN){
                                 SetDataUser(STATUS, ADMIN, "")
-                                startActivity(Intent(context, AdminActivity::class.java))
+                                startActivity(Intent(context, DashboardActivity::class.java))
                                 (context as Activity).finish()
                                 return
                             }
