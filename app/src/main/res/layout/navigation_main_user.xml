@@ -39,7 +39,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:fontFamily="@font/lato_bold"/>
 
         </LinearLayout>
@@ -52,16 +52,17 @@
             android:layout_centerInParent="true"
             android:layout_width="160dp"
             android:layout_height="80dp"
-            android:background="@drawable/custom_history">
+            android:background="@drawable/custom_shape">
 
             <TextView
+                android:id="@+id/txt_history"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="History"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:textColor="#717171"
+                android:textColor="@color/white"
                 android:fontFamily="@font/lato_bold"/>
 
         </LinearLayout>
