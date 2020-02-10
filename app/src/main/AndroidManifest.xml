@@ -14,6 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".view.admin.RejectActivity"></activity>
+        <activity android:name=".view.admin.ManageUserActivity" />
+        <activity android:name=".view.admin.RequestActivity" />
+        <activity android:name=".view.admin.DashboardActivity" />
         <activity android:name=".view.user.EditProfile" />
         <activity android:name=".view.user.AddRecipesActivity" />
         <activity android:name=".view.user.ArchiveActivity" />
@@ -24,7 +28,7 @@
         <activity android:name=".view.user.FavoriteActivity" />
         <activity android:name=".view.user.UserActivity" />
         <activity android:name=".view.RecipeDetailActivity" />
-        <activity android:name=".view.admin.AdminActivity" />
+        <activity android:name=".view.admin.AcceptActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".view.auth.Authentification">
             <intent-filter>
