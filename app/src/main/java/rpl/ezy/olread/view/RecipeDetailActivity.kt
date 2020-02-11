@@ -207,9 +207,38 @@ class RecipeDetailActivity : AppCompatActivity() {
 
                 getArchive(dataRecipe)
                 getLike(dataRecipe)
+                sendToHistory(dataRecipe)
 
             }
         })
+    }
+
+    private fun sendToHistory(data: MRecipe) {
+        val service =
+            RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
+        service.sendHistory(
+            sharedPref!!.getIntSharedPreferences(USER_ID),
+            data.recipe_id
+        )
+            .enqueue(object : Callback<ResponseRecipes> {
+                override fun onFailure(call: Call<ResponseRecipes>, t: Throwable) {
+                    Toast.makeText(
+                        this@RecipeDetailActivity,
+                        "Something went wrong...Please try later!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    Log.d("LOGLOGAN", "${t.message}")
+                }
+
+                override fun onResponse(
+                    call: Call<ResponseRecipes>,
+                    response: Response<ResponseRecipes>
+                ) {
+                    if (response.isSuccessful) {
+//                        Toast.makeText(mContext, response.body()!!.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
     }
 
     private fun confirmRecipe(recipe_id: Int){

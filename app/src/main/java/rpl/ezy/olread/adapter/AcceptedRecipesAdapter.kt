@@ -57,40 +57,11 @@ class AcceptedRecipesAdapter(var mContext: Context, var data: ArrayList<MRecipe>
         Log.d("TES_RECIPES", "${data[position].recipe}")
 
         holder.itemView.setOnClickListener {
-            sendToHistory(position)
             (mContext as Activity).startActivity(
                 Intent(mContext, RecipeDetailActivity::class.java)
                     .putExtra(ConstantUtils.RECIPE_ID, data[position].recipe_id)
             )
         }
-    }
-
-    private fun sendToHistory(position: Int) {
-        val service =
-            RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
-        service.sendHistory(
-            sharedPreferences!!.getIntSharedPreferences(USER_ID),
-            data.get(position).recipe_id
-        )
-            .enqueue(object : Callback<ResponseRecipes> {
-                override fun onFailure(call: Call<ResponseRecipes>, t: Throwable) {
-                    Toast.makeText(
-                        mContext,
-                        "Something went wrong...Please try later!",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    Log.d("LOGLOGAN", "${t.message}")
-                }
-
-                override fun onResponse(
-                    call: Call<ResponseRecipes>,
-                    response: Response<ResponseRecipes>
-                ) {
-                    if (response.isSuccessful) {
-//                        Toast.makeText(mContext, response.body()!!.message, Toast.LENGTH_SHORT).show()
-                    }
-                }
-            })
     }
 
     inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {

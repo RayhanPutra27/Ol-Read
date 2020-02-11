@@ -13,24 +13,24 @@
         android:background="@drawable/custom_history"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/bt_close_select_kategori"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginEnd="20dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:visibility="visible">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/bt_close_select_kategori"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="20dp"-->
+<!--            android:layout_marginTop="14dp"-->
+<!--            android:layout_marginEnd="20dp"-->
+<!--            android:clickable="true"-->
+<!--            android:focusable="true"-->
+<!--            android:visibility="visible">-->
 
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="6dp"
-                android:layout_marginStart="60dp"
-                android:layout_marginEnd="60dp"
-                android:background="@drawable/bg_close" />
-        </LinearLayout>
+<!--            <View-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="6dp"-->
+<!--                android:layout_marginStart="60dp"-->
+<!--                android:layout_marginEnd="60dp"-->
+<!--                android:background="@drawable/bg_close" />-->
+<!--        </LinearLayout>-->
 
         <TextView
             android:layout_width="match_parent"

@@ -118,7 +118,6 @@
                         android:layout_weight="1"
                         android:background="@color/transparent"
                         android:fontFamily="@font/lato_light"
-                        android:hint="@string/kategori"
                         android:inputType="text"
                         android:padding="14dp"
                         android:textColor="@color/black"
@@ -173,13 +172,12 @@
                     <EditText
                         android:id="@+id/txt_recipe"
                         android:layout_width="match_parent"
-                        android:layout_height="120dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="4dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_margin="12dp"
                         android:fontFamily="@font/lato_light"
                         android:background="@color/transparent"
+                        android:gravity="top"
                         android:textColor="@color/black"
                         android:textColorHint="@color/grey_1" />
                 </LinearLayout>
@@ -198,8 +196,20 @@
         android:background="@drawable/bg_btn_add"
         android:fontFamily="@font/lato_bold"
         android:paddingHorizontal="16dp"
-        android:text="Add"
+        android:text="Add Recipe"
         android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:textSize="20sp"/>
+    <Button
+        android:id="@+id/edit_recipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_btn_add"
+        android:fontFamily="@font/lato_bold"
+        android:paddingHorizontal="16dp"
+        android:text="Edit Recipe"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
 </RelativeLayout>
