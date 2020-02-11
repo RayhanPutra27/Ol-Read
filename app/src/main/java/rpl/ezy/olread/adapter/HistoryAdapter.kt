@@ -67,7 +67,8 @@ class HistoryAdapter(var mContext: Context, var data: ArrayList<MRecipe>) :
             builder.setMessage("Anda yakin ingin delete history?")
 
             builder.setPositiveButton(android.R.string.yes) { _, _ ->
-                Toast.makeText(mContext, "YES", Toast.LENGTH_SHORT).show()
+                deleteOne(position)
+//                Toast.makeText(mContext, "YES", Toast.LENGTH_SHORT).show()
             }
 
             builder.setNegativeButton(android.R.string.no) { dialog, _ ->
@@ -80,7 +81,7 @@ class HistoryAdapter(var mContext: Context, var data: ArrayList<MRecipe>) :
 
     private fun deleteOne(position: Int) {
         val service = RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
-        val call = service.delOneHistory(sharedPreferences.getIntSharedPreferences(ConstantUtils.USER_ID), data[position].recipe_id)
+        val call = service.delOneHistory(sharedPreferences!!.getIntSharedPreferences(ConstantUtils.USER_ID), data[position].recipe_id)
         call.enqueue(object: Callback<ResponseRecipes>{
             override fun onFailure(call: Call<ResponseRecipes>, t: Throwable) {
                 Toast.makeText(
@@ -96,7 +97,6 @@ class HistoryAdapter(var mContext: Context, var data: ArrayList<MRecipe>) :
                 response: Response<ResponseRecipes>
             ) {
                 if(response.isSuccessful) {
-                    Toast.makeText(mContext, )
                 }
             }
         })
