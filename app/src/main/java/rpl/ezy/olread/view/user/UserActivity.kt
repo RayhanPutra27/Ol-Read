@@ -23,6 +23,7 @@ import rpl.ezy.olread.api.RetrofitClientInstance
 import rpl.ezy.olread.response.ResponseCategory
 import rpl.ezy.olread.response.ResponseRecipes
 import rpl.ezy.olread.utils.ConstantUtils
+import rpl.ezy.olread.utils.ConstantUtils.USER_ID
 import rpl.ezy.olread.utils.SharedPreferenceUtils
 import rpl.ezy.olread.view.auth.Authentification
 
@@ -55,7 +56,7 @@ class UserActivity : AppCompatActivity() {
         setRecyclerMenu()
 
         nav_profile.setOnClickListener {
-            startActivity(Intent(this@UserActivity, ProfileActivity::class.java))
+            startActivity(Intent(this@UserActivity, ProfileActivity::class.java).putExtra(USER_ID, sharedPreferences!!.getIntSharedPreferences(USER_ID)))
         }
 
         bt_logout.setOnClickListener {

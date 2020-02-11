@@ -6,6 +6,7 @@ object ConstantUtils {
     const val USER = 0
 
     const val ACCEPTED = 1
+    const val REJECTED = 2
     const val UNACCEPTED = 0
 
     const val USER_ID = "user_id"
@@ -22,4 +23,7 @@ object ConstantUtils {
     const val ISACCEPT = "isaccept"
     const val KATEGORI = "kategori"
 
+
+    const val ACTIONBAN = 1
+    const val ACTIONUNBAN = 0
 }

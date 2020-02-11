@@ -11,8 +11,8 @@
         android:id="@+id/img_back"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="16dp"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:src="@drawable/left_white" />
 
     <ImageView
@@ -26,8 +26,8 @@
         android:layout_alignParentRight="true"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="16dp"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:src="@drawable/edit_white" />
 
 </RelativeLayout>

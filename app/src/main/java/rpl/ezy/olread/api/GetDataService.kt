@@ -110,6 +110,17 @@ interface GetDataService {
         @Part("kategori") kategori: RequestBody
     ): Call<ResponseAddRecipe>
 
+    @GET("recipes/rejected")
+    fun getRejectedRecipe(): Call<ResponseRecipes>
+
+    @GET("recipes/reject/{recipes_id}")
+    fun rejectRecipes(@Path("recipes_id") recipe_id: Int): Call<ResponseRecipes>
+
+    @GET("users/ban/{user_id}")
+    fun banUser(@Path("user_id") user_id: Int): Call<ResponseUsers>
+
+    @GET("users/unban/{user_id}")
+    fun unBanUser(@Path("user_id") user_id: Int): Call<ResponseUsers>
 
     //HISTORY
     @GET("histori/{user_id}")
@@ -121,7 +132,6 @@ interface GetDataService {
         @Field("user_id") user_id: Int,
         @Field("recipe_id") recipe_id: Int
     ): Call<ResponseRecipes>
-
 
     @FormUrlEncoded
     @POST("histori/delete")
