@@ -20,6 +20,7 @@ import rpl.ezy.olread.adapter.CategoryAdapter
 import rpl.ezy.olread.adapter.RecyclerAcceptedRecipesAdapter
 import rpl.ezy.olread.api.GetDataService
 import rpl.ezy.olread.api.RetrofitClientInstance
+import rpl.ezy.olread.response.ResponseCategory
 import rpl.ezy.olread.response.ResponseRecipes
 import rpl.ezy.olread.utils.ConstantUtils
 import rpl.ezy.olread.utils.SharedPreferenceUtils
@@ -155,8 +156,8 @@ class UserActivity : AppCompatActivity() {
         val service =
             RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
         val call = service.getCategory()
-        call.enqueue(object : Callback<ResponseRecipes> {
-            override fun onFailure(call: Call<ResponseRecipes>, t: Throwable) {
+        call.enqueue(object : Callback<ResponseCategory> {
+            override fun onFailure(call: Call<ResponseCategory>, t: Throwable) {
                 Toast.makeText(
                     this@UserActivity,
                     "Something went wrong...Please try later!",
@@ -166,13 +167,13 @@ class UserActivity : AppCompatActivity() {
             }
 
             override fun onResponse(
-                call: Call<ResponseRecipes>,
-                response: Response<ResponseRecipes>
+                call: Call<ResponseCategory>,
+                response: Response<ResponseCategory>
             ) {
                 if (response.isSuccessful) {
                     if (response.body()!!.status == 200) {
-                        var data = response.body()!!.data
-                        var mAdapter = CategoryAdapter(this@UserActivity, data)
+                        val data = response.body()!!.data
+                        val mAdapter = CategoryAdapter(this@UserActivity, data)
                         recycler_category.apply {
                             layoutManager = LinearLayoutManager(
                                 applicationContext,

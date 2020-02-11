@@ -28,6 +28,7 @@ class SearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
+        setToolbar()
 
         sharedPref = SharedPreferenceUtils(this@SearchActivity)
 
@@ -65,6 +66,15 @@ class SearchActivity : AppCompatActivity() {
             finish()
         }
 
+    }
+
+    private fun setToolbar() {
+        setSupportActionBar(toolbar)
+        toolbar.navigationIcon = resources.getDrawable(R.drawable.ic_left)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        toolbar.setNavigationOnClickListener {
+            finish()
+        }
     }
 
 

@@ -16,12 +16,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#ECECEC"
-            android:paddingTop="16dp"
             android:paddingHorizontal="16dp">
 
             <RelativeLayout
                 android:id="@+id/header"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content">
 
                 <ImageView
@@ -40,9 +40,30 @@
 
             </RelativeLayout>
 
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginTop="16dp"
+                android:background="#ECECEC">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profile_history"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/custom_item_category" />
+                </RelativeLayout>
+            </androidx.appcompat.widget.Toolbar>
+
             <LinearLayout
                 android:layout_marginTop="16dp"
-                android:layout_below="@+id/header"
+                android:layout_below="@+id/toolbar"
                 android:id="@+id/view_search"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"

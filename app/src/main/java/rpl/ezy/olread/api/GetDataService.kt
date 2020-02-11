@@ -52,7 +52,7 @@ interface GetDataService {
     fun confirmRecipes(@Path("recipes_id") recipe_id: Int): Call<ResponseRecipes>
 
     @GET("recipes/kategori")
-    fun getCategory(): Call<ResponseRecipes>
+    fun getCategory(): Call<ResponseCategory>
 
     @GET("recipes/search/{title}")
     fun getSearch(@Path("title") title: String): Call<ResponseRecipes>
@@ -129,4 +129,8 @@ interface GetDataService {
         @Field("user_id") user_id: Int,
         @Field("recipe_id") recipe_id: Int
     ): Call<ResponseRecipes>
+
+
+    @GET("histori/delete/{user_id}")
+    fun delHistory(@Path("user_id") user_id: Int): Call<ResponseRecipes>
 }

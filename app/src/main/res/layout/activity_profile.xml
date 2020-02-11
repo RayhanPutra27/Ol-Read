@@ -41,7 +41,7 @@
                 android:layout_marginTop="74dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chef Juna"
+                android:text="Chef"
                 android:fontFamily="@font/lato_bold"
                 android:textSize="24sp"
                 android:layout_centerHorizontal="true"/>
@@ -86,7 +86,7 @@
                         android:id="@+id/total_like"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="10"
+                        android:text="0"
                         android:fontFamily="@font/lato_bold"
                         android:textSize="24sp"
                         android:layout_centerHorizontal="true"/>
@@ -113,7 +113,7 @@
                         android:id="@+id/total_post"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="10"
+                        android:text="0"
                         android:fontFamily="@font/lato_bold"
                         android:textSize="24sp"
                         android:layout_centerHorizontal="true"/>
@@ -140,7 +140,7 @@
                         android:id="@+id/total_archive"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="10"
+                        android:text="0"
                         android:fontFamily="@font/lato_bold"
                         android:textSize="24sp"
                         android:layout_centerHorizontal="true"/>

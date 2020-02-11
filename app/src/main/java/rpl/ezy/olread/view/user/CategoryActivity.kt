@@ -30,11 +30,20 @@ class CategoryActivity : AppCompatActivity() {
 
         if(intent != null) {
             kategori = intent.getStringExtra(KATEGORI)
-            nama_category.setText(kategori)
+            nama_category_toolbar.setText(kategori)
         }
 
         setRecyclerMenu()
+        setToolbar()
+    }
 
+    private fun setToolbar() {
+        setSupportActionBar(toolbar)
+        toolbar.navigationIcon = resources.getDrawable(R.drawable.ic_left)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        toolbar.setNavigationOnClickListener {
+            finish()
+        }
     }
 
     fun setRecyclerMenu(){

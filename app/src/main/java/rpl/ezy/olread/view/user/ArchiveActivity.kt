@@ -32,6 +32,7 @@ class ArchiveActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_archive)
+        setToolbar()
         sharedPref = SharedPreferenceUtils(this@ArchiveActivity)
 
         GlideApp.with(this@ArchiveActivity)
@@ -41,6 +42,15 @@ class ArchiveActivity : AppCompatActivity() {
         txt_user.text = sharedPref!!.getStringSharedPreferences(USERNAME)
 
         img_back.setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun setToolbar() {
+        setSupportActionBar(toolbar)
+        toolbar.navigationIcon = resources.getDrawable(R.drawable.ic_left)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        toolbar.setNavigationOnClickListener {
             finish()
         }
     }

@@ -13,11 +13,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import rpl.ezy.olread.R
+import rpl.ezy.olread.model.MCategory
 import rpl.ezy.olread.model.MRecipe
 import rpl.ezy.olread.utils.ConstantUtils.KATEGORI
 import rpl.ezy.olread.view.user.CategoryActivity
 
-class CategoryAdapter(var context: Context, var data: ArrayList<MRecipe>) :
+class CategoryAdapter(var context: Context, var data: ArrayList<MCategory>) :
     RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
     var selectedPosition = -1
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

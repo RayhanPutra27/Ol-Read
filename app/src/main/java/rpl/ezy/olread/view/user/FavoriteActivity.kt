@@ -46,7 +46,7 @@ class FavoriteActivity : AppCompatActivity() {
 
     private fun setToolbar() {
         setSupportActionBar(toolbar)
-        toolbar.navigationIcon = resources.getDrawable(R.drawable.back_black)
+        toolbar.navigationIcon = resources.getDrawable(R.drawable.ic_left)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         toolbar.setNavigationOnClickListener {
             finish()

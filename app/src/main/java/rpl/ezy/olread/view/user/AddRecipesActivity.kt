@@ -37,12 +37,25 @@ class AddRecipesActivity : AppCompatActivity() {
 
     private var sharedPreferences: SharedPreferenceUtils? = null
     private lateinit var imageData: MultipartBody.Part
+    var mDialog: SelectKategori? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_recipes)
 
         sharedPreferences = SharedPreferenceUtils(this@AddRecipesActivity)
+
+        mDialog = SelectKategori(this@AddRecipesActivity)
+        mDialog!!.interfaceKategori(object: SelectKategori.InterfaceKategori {
+
+            override fun void(kategori: String) {
+                txt_kategori.text = kategori
+            }
+        })
+
+        pilih_kategori.setOnClickListener {
+            mDialog!!.show()
+        }
 
         initView()
 

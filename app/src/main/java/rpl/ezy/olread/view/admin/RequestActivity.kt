@@ -3,8 +3,10 @@ package rpl.ezy.olread.view.admin
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_recipe_detail.*
 import kotlinx.android.synthetic.main.activity_request.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,7 +26,8 @@ class RequestActivity : AppCompatActivity() {
         bt_back.setOnClickListener {
             finish()
         }
-
+        bt_confirm.visibility = View.VISIBLE
+        bt_reject.visibility = View.VISIBLE
         UnAcceptedRecipes()
     }
 

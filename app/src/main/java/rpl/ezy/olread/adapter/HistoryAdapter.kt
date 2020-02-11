@@ -1,6 +1,7 @@
 package rpl.ezy.olread.adapter
 
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -31,7 +32,13 @@ import kotlin.collections.ArrayList
 class HistoryAdapter(var mContext: Context, var data: ArrayList<MRecipe>) :
     RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
+    var interfaces: indeleteOne? = null
     private var sharedPreferences: SharedPreferenceUtils? = null
+    var loading: ProgressDialog? = null
+
+    fun interfaceClick(interfaces: indeleteOne) {
+        this.interfaces = interfaces
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context)
@@ -43,6 +50,8 @@ class HistoryAdapter(var mContext: Context, var data: ArrayList<MRecipe>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         sharedPreferences = SharedPreferenceUtils(mContext)
+        loading = ProgressDialog(mContext)
+        loading!!.setCancelable(false)
 
         GlideApp.with(mContext)
             .load(data[position].img_url)
@@ -68,6 +77,7 @@ class HistoryAdapter(var mContext: Context, var data: ArrayList<MRecipe>) :
 
             builder.setPositiveButton(android.R.string.yes) { _, _ ->
                 deleteOne(position)
+                interfaces!!.delete(true)
 //                Toast.makeText(mContext, "YES", Toast.LENGTH_SHORT).show()
             }
 
@@ -80,10 +90,13 @@ class HistoryAdapter(var mContext: Context, var data: ArrayList<MRecipe>) :
     }
 
     private fun deleteOne(position: Int) {
+        loading!!.setMessage("Loading . . .")
+        loading!!.show()
         val service = RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
         val call = service.delOneHistory(sharedPreferences!!.getIntSharedPreferences(ConstantUtils.USER_ID), data[position].recipe_id)
         call.enqueue(object: Callback<ResponseRecipes>{
             override fun onFailure(call: Call<ResponseRecipes>, t: Throwable) {
+                loading!!.cancel()
                 Toast.makeText(
                     mContext,
                     "Something went wrong...Please try later!",
@@ -97,6 +110,8 @@ class HistoryAdapter(var mContext: Context, var data: ArrayList<MRecipe>) :
                 response: Response<ResponseRecipes>
             ) {
                 if(response.isSuccessful) {
+                    loading!!.cancel()
+                    Toast.makeText(mContext, "Berhasil hapus!", Toast.LENGTH_SHORT).show()
                 }
             }
         })
@@ -107,6 +122,10 @@ class HistoryAdapter(var mContext: Context, var data: ArrayList<MRecipe>) :
         var tv_title = v.findViewById(R.id.tv_title) as TextView
         var tv_kategori = v.findViewById(R.id.tv_kategori) as TextView
         var tv_like = v.findViewById(R.id.tv_like) as TextView
+    }
+
+    interface indeleteOne {
+        fun delete(isSuccess: Boolean)
     }
 
 }

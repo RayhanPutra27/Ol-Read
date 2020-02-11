@@ -22,6 +22,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:layout_marginTop="16dp"
                 android:background="#ECECEC">
 
                 <RelativeLayout
@@ -43,8 +44,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/toolbar"
-                android:paddingHorizontal="16dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -84,16 +85,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/text_header"
+                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/custom_item_horizontal"
                 android:paddingHorizontal="16dp"
-                android:layout_marginHorizontal="16dp"
                 android:paddingTop="16dp">
+
+                <ImageButton
+                    android:id="@+id/deleteAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/custom_round_line"
+                    android:padding="7dp"
+                    android:src="@drawable/ic_delete" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_history"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/deleteAll" />
 
             </RelativeLayout>
 
