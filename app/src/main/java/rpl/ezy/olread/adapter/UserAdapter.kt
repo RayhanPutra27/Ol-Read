@@ -1,6 +1,8 @@
 package rpl.ezy.olread.adapter
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +15,9 @@ import kotlinx.android.synthetic.main.dialog_baned.*
 import rpl.ezy.olread.R
 import rpl.ezy.olread.model.MUser
 import rpl.ezy.olread.utils.ConstantUtils
+import rpl.ezy.olread.utils.ConstantUtils.USER_ID
 import rpl.ezy.olread.view.admin.BanedDialog
+import rpl.ezy.olread.view.user.ProfileActivity
 
 class UserAdapter(var mContext: Context, var data: ArrayList<MUser>) :
     RecyclerView.Adapter<UserAdapter.ViewHolder>() {
@@ -45,6 +49,10 @@ class UserAdapter(var mContext: Context, var data: ArrayList<MUser>) :
             holder.baned.visibility = View.VISIBLE
         } else {
             holder.baned.visibility = View.GONE
+        }
+
+        holder.itemView.setOnClickListener {
+            (mContext as Activity).startActivity(Intent(mContext, ProfileActivity::class.java).putExtra(USER_ID, data[position].user_id))
         }
 
         holder.menu.setOnClickListener {

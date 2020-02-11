@@ -23,13 +23,13 @@ import rpl.ezy.olread.api.RetrofitClientInstance
 import rpl.ezy.olread.model.MRecipe
 import rpl.ezy.olread.response.ResponseRecipes
 import rpl.ezy.olread.utils.ConstantUtils
-import rpl.ezy.olread.utils.ConstantUtils.USER_ID
 import rpl.ezy.olread.utils.SharedPreferenceUtils
 import rpl.ezy.olread.view.RecipeDetailActivity
-import rpl.ezy.olread.view.user.HistoryActivity
+import java.util.*
+import kotlin.collections.ArrayList
 
-class AcceptedRecipesAdapter(var mContext: Context, var data: ArrayList<MRecipe>) :
-    RecyclerView.Adapter<AcceptedRecipesAdapter.ViewHolder>() {
+class HistoryAdapter(var mContext: Context, var data: ArrayList<MRecipe>) :
+    RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
     private var sharedPreferences: SharedPreferenceUtils? = null
 
@@ -57,40 +57,49 @@ class AcceptedRecipesAdapter(var mContext: Context, var data: ArrayList<MRecipe>
         Log.d("TES_RECIPES", "${data[position].recipe}")
 
         holder.itemView.setOnClickListener {
-            sendToHistory(position)
             (mContext as Activity).startActivity(
                 Intent(mContext, RecipeDetailActivity::class.java)
                     .putExtra(ConstantUtils.RECIPE_ID, data[position].recipe_id)
             )
         }
+        holder.itemView.setOnLongClickListener {
+            val builder = AlertDialog.Builder(mContext)
+            builder.setMessage("Anda yakin ingin delete history?")
+
+            builder.setPositiveButton(android.R.string.yes) { _, _ ->
+                deleteOne(position)
+//                Toast.makeText(mContext, "YES", Toast.LENGTH_SHORT).show()
+            }
+
+            builder.setNegativeButton(android.R.string.no) { dialog, _ ->
+                Toast.makeText(mContext, "NO", Toast.LENGTH_SHORT).show()
+            }
+            builder.show()
+            return@setOnLongClickListener true
+        }
     }
 
-    private fun sendToHistory(position: Int) {
-        val service =
-            RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
-        service.sendHistory(
-            sharedPreferences!!.getIntSharedPreferences(USER_ID),
-            data.get(position).recipe_id
-        )
-            .enqueue(object : Callback<ResponseRecipes> {
-                override fun onFailure(call: Call<ResponseRecipes>, t: Throwable) {
-                    Toast.makeText(
-                        mContext,
-                        "Something went wrong...Please try later!",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    Log.d("LOGLOGAN", "${t.message}")
-                }
+    private fun deleteOne(position: Int) {
+        val service = RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
+        val call = service.delOneHistory(sharedPreferences!!.getIntSharedPreferences(ConstantUtils.USER_ID), data[position].recipe_id)
+        call.enqueue(object: Callback<ResponseRecipes>{
+            override fun onFailure(call: Call<ResponseRecipes>, t: Throwable) {
+                Toast.makeText(
+                    mContext,
+                    "Something went wrong...Please try later!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.d("LOGLOGAN", "${t.message}")
+            }
 
-                override fun onResponse(
-                    call: Call<ResponseRecipes>,
-                    response: Response<ResponseRecipes>
-                ) {
-                    if (response.isSuccessful) {
-//                        Toast.makeText(mContext, response.body()!!.message, Toast.LENGTH_SHORT).show()
-                    }
+            override fun onResponse(
+                call: Call<ResponseRecipes>,
+                response: Response<ResponseRecipes>
+            ) {
+                if(response.isSuccessful) {
                 }
-            })
+            }
+        })
     }
 
     inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {

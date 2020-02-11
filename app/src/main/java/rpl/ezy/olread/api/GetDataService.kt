@@ -121,4 +121,22 @@ interface GetDataService {
 
     @GET("users/unban/{user_id}")
     fun unBanUser(@Path("user_id") user_id: Int): Call<ResponseUsers>
+
+    //HISTORY
+    @GET("histori/{user_id}")
+    fun allHistory(@Path("user_id") user_id: Int): Call<ResponseRecipes>
+
+    @FormUrlEncoded
+    @POST("histori/add")
+    fun sendHistory(
+        @Field("user_id") user_id: Int,
+        @Field("recipe_id") recipe_id: Int
+    ): Call<ResponseRecipes>
+
+    @FormUrlEncoded
+    @POST("histori/delete")
+    fun delOneHistory(
+        @Field("user_id") user_id: Int,
+        @Field("recipe_id") recipe_id: Int
+    ): Call<ResponseRecipes>
 }

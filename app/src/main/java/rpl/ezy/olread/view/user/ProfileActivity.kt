@@ -3,6 +3,7 @@ package rpl.ezy.olread.view.user
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -18,7 +19,9 @@ import rpl.ezy.olread.api.GetDataService
 import rpl.ezy.olread.api.RetrofitClientInstance
 import rpl.ezy.olread.response.ResponseRecipes
 import rpl.ezy.olread.response.ResponseUsers
+import rpl.ezy.olread.utils.ConstantUtils.ADMIN
 import rpl.ezy.olread.utils.ConstantUtils.PROFIL
+import rpl.ezy.olread.utils.ConstantUtils.STATUS
 import rpl.ezy.olread.utils.ConstantUtils.USER_ID
 import rpl.ezy.olread.utils.SharedPreferenceUtils
 
@@ -42,13 +45,10 @@ class ProfileActivity : AppCompatActivity() {
             setArchive(intent.getIntExtra(USER_ID, 0))
         }
 
-        img_profile.setOnClickListener {
-            startActivity(
-                Intent(this, EditProfile::class.java).putExtra(
-                    PROFIL,
-                    sharedPreference!!.getStringSharedPreferences(PROFIL)
-                )
-            )
+        if(sharedPreference!!.getIntSharedPreferences(STATUS) == ADMIN){
+            addRecipe.visibility = View.GONE
+        } else {
+            addRecipe.visibility = View.VISIBLE
         }
 
 //        name.text = sharedPreference!!.getStringSharedPreferences(USERNAME)
@@ -85,6 +85,14 @@ class ProfileActivity : AppCompatActivity() {
                             .into(img_profile)
                         name.text = data.username
                         total_like.text = data.like.toString()
+
+                        img_profile.setOnClickListener {
+                            startActivity(
+                                Intent(this@ProfileActivity, EditProfile::class.java)
+                                    .putExtra(PROFIL,data.profil)
+                                    .putExtra("type", PROFIL)
+                            )
+                        }
                     }
                 } else {
                     Toast.makeText(

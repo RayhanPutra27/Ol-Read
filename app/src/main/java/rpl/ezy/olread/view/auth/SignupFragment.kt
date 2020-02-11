@@ -57,6 +57,7 @@ class SignupFragment : Fragment() {
     var etUsername: EditText? = null
     var etEmail: EditText? = null
     var etPassword: EditText? = null
+    var etPasswordConfirm: EditText? = null
     var imgProfile: CircleImageView? = null
     var loading: ProgressDialog? = null
     private lateinit var imageData: MultipartBody.Part
@@ -71,7 +72,12 @@ class SignupFragment : Fragment() {
         etUsername = view.findViewById(R.id.et_username_reg)
         etEmail = view.findViewById(R.id.et_email_reg)
         etPassword = view.findViewById(R.id.et_pass_reg)
+        etPasswordConfirm = view.findViewById(R.id.et_pass_confirm)
         imgProfile = view.findViewById(R.id.nav_profile)
+
+        val emptyFile = RequestBody.create(MediaType.parse("text/plain"), "")
+        imageData = MultipartBody.Part.createFormData("profil", "", emptyFile)
+
         loading = ProgressDialog(context!!)
         loading!!.setCancelable(false)
 
@@ -138,6 +144,20 @@ class SignupFragment : Fragment() {
         if (etPassword?.length()!! < 8) {
             etPassword?.error = "Password karakter minimal 8"
             etPassword?.requestFocus()
+            return false
+        }
+        if (etPasswordConfirm?.text?.isEmpty()!!) {
+            etPasswordConfirm?.error = "Isi Confirm pass"
+            etPasswordConfirm?.requestFocus()
+            return false
+        }
+        if (etPasswordConfirm?.length()!! < 8) {
+            etPasswordConfirm?.error = "Password karakter minimal 8"
+            etPasswordConfirm?.requestFocus()
+            return false
+        }
+        if(etPasswordConfirm?.text.toString() != etPassword?.text.toString()){
+            Toast.makeText(context, "Password tidak sama", Toast.LENGTH_SHORT).show()
             return false
         }
 

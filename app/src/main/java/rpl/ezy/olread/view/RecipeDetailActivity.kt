@@ -20,7 +20,9 @@ import rpl.ezy.olread.model.MRecipe
 import rpl.ezy.olread.response.ResponseRecipes
 import rpl.ezy.olread.response.ResponseRecipeById
 import rpl.ezy.olread.utils.ConstantUtils
+import rpl.ezy.olread.utils.ConstantUtils.ACCEPTED
 import rpl.ezy.olread.utils.ConstantUtils.PROFIL
+import rpl.ezy.olread.utils.ConstantUtils.RECIPE
 import rpl.ezy.olread.utils.ConstantUtils.RECIPE_ID
 import rpl.ezy.olread.utils.ConstantUtils.REJECTED
 import rpl.ezy.olread.utils.ConstantUtils.USER_ID
@@ -175,10 +177,11 @@ class RecipeDetailActivity : AppCompatActivity() {
                 tv_title.text = dataRecipe.title
                 tv_recipe.text = dataRecipe.recipe
 
-                if (dataRecipe.isAccept == ConstantUtils.ACCEPTED){
+                if (dataRecipe.isAccept == ACCEPTED){
                     view_button.visibility = View.GONE
                 } else if (dataRecipe.isAccept == REJECTED){
-                    view_button.visibility = View.GONE
+                    view_button.visibility = View.VISIBLE
+                    bt_reject.visibility = View.GONE
                     img_archive.visibility = View.GONE
                     img_favorite.visibility = View.GONE
                 } else {
@@ -197,7 +200,9 @@ class RecipeDetailActivity : AppCompatActivity() {
                 }
 
                 img_item.setOnClickListener {
-                    startActivity(Intent(this@RecipeDetailActivity, EditProfile::class.java).putExtra(PROFIL, dataRecipe.img_url))
+                    startActivity(Intent(this@RecipeDetailActivity, EditProfile::class.java)
+                        .putExtra(PROFIL, dataRecipe.img_url)
+                        .putExtra("type", RECIPE))
                 }
 
                 getArchive(dataRecipe)
