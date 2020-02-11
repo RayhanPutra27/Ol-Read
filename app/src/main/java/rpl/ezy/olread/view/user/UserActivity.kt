@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -60,7 +61,17 @@ class UserActivity : AppCompatActivity() {
         }
 
         bt_logout.setOnClickListener {
-            actionLogout()
+            val builder = AlertDialog.Builder(this@UserActivity)
+            builder.setMessage("Anda yakin ingin keluar?")
+
+            builder.setPositiveButton(android.R.string.yes) { _, _ ->
+                actionLogout()
+            }
+
+            builder.setNegativeButton(android.R.string.no) { _, _ ->
+//                Toast.makeText(this, "NO", Toast.LENGTH_SHORT).show()
+            }
+            builder.show()
         }
         if (btn_history.isClickable) {
             btn_history.setBackgroundResource(R.drawable.custom_history)
