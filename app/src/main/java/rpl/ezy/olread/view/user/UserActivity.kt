@@ -30,7 +30,7 @@ import rpl.ezy.olread.utils.ConstantUtils
 import rpl.ezy.olread.utils.SharedPreferenceUtils
 import rpl.ezy.olread.view.auth.Authentification
 import androidx.core.view.GravityCompat
-
+import rpl.ezy.olread.utils.ConstantUtils.USER_ID
 
 
 class UserActivity : AppCompatActivity() {
@@ -61,7 +61,8 @@ class UserActivity : AppCompatActivity() {
         setRecyclerMenu()
 
         nav_profile.setOnClickListener {
-            startActivity(Intent(this@UserActivity, ProfileActivity::class.java))
+            startActivity(Intent(this@UserActivity, ProfileActivity::class.java)
+                .putExtra(USER_ID, sharedPreferences!!.getStringSharedPreferences(USER_ID)))
         }
 
         bt_logout.setOnClickListener {

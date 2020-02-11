@@ -22,6 +22,7 @@ import rpl.ezy.olread.response.ResponseRecipeById
 import rpl.ezy.olread.utils.ConstantUtils
 import rpl.ezy.olread.utils.ConstantUtils.PROFIL
 import rpl.ezy.olread.utils.ConstantUtils.RECIPE_ID
+import rpl.ezy.olread.utils.ConstantUtils.REJECTED
 import rpl.ezy.olread.utils.ConstantUtils.USER_ID
 import rpl.ezy.olread.utils.SharedPreferenceUtils
 import rpl.ezy.olread.view.user.EditProfile
@@ -176,6 +177,10 @@ class RecipeDetailActivity : AppCompatActivity() {
 
                 if (dataRecipe.isAccept == ConstantUtils.ACCEPTED){
                     view_button.visibility = View.GONE
+                } else if (dataRecipe.isAccept == REJECTED){
+                    view_button.visibility = View.GONE
+                    img_archive.visibility = View.GONE
+                    img_favorite.visibility = View.GONE
                 } else {
                     view_button.visibility = View.VISIBLE
                     img_archive.visibility = View.GONE
@@ -185,6 +190,10 @@ class RecipeDetailActivity : AppCompatActivity() {
 
                 bt_confirm.setOnClickListener {
                     confirmRecipe(recipe_id)
+                }
+
+                bt_reject.setOnClickListener {
+                    rejectRecipe(recipe_id)
                 }
 
                 img_item.setOnClickListener {
@@ -201,6 +210,47 @@ class RecipeDetailActivity : AppCompatActivity() {
     private fun confirmRecipe(recipe_id: Int){
         val service = RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
         val call = service.confirmRecipes(recipe_id)
+        call.enqueue(object : Callback<ResponseRecipes> {
+            override fun onFailure(call: Call<ResponseRecipes>, t: Throwable) {
+                Toast.makeText(
+                    this@RecipeDetailActivity,
+                    "Something went wrong...Please try later!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.d("LOGLOGAN", "${t.message}")
+            }
+
+            override fun onResponse(call: Call<ResponseRecipes>,response: Response<ResponseRecipes>) {
+                if(response.isSuccessful){
+                    if(response.body()!!.status == 200){
+                        Toast.makeText(
+                            this@RecipeDetailActivity,
+                            response.body()!!.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        finish()
+                    } else {
+                        Toast.makeText(
+                            this@RecipeDetailActivity,
+                            response.body()!!.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                } else {
+                    Toast.makeText(
+                        this@RecipeDetailActivity,
+                        "Ada kesalahan server",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+        })
+    }
+
+    private fun rejectRecipe(recipe_id: Int){
+        val service = RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
+        val call = service.rejectRecipes(recipe_id)
         call.enqueue(object : Callback<ResponseRecipes> {
             override fun onFailure(call: Call<ResponseRecipes>, t: Throwable) {
                 Toast.makeText(
