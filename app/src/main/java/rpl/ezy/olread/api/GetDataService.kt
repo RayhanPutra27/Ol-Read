@@ -121,4 +121,12 @@ interface GetDataService {
         @Field("user_id") user_id: Int,
         @Field("recipe_id") recipe_id: Int
     ): Call<ResponseRecipes>
+
+
+    @FormUrlEncoded
+    @POST("histori/delete")
+    fun delOneHistory(
+        @Field("user_id") user_id: Int,
+        @Field("recipe_id") recipe_id: Int
+    ): Call<ResponseRecipes>
 }

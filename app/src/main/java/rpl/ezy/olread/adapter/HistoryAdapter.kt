@@ -13,12 +13,20 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import rpl.ezy.olread.GlideApp
 import rpl.ezy.olread.R
+import rpl.ezy.olread.api.GetDataService
+import rpl.ezy.olread.api.RetrofitClientInstance
 import rpl.ezy.olread.model.MRecipe
+import rpl.ezy.olread.response.ResponseRecipes
 import rpl.ezy.olread.utils.ConstantUtils
 import rpl.ezy.olread.utils.SharedPreferenceUtils
 import rpl.ezy.olread.view.RecipeDetailActivity
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HistoryAdapter(var mContext: Context, var data: ArrayList<MRecipe>) :
     RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
@@ -68,6 +76,30 @@ class HistoryAdapter(var mContext: Context, var data: ArrayList<MRecipe>) :
             builder.show()
             return@setOnLongClickListener true
         }
+    }
+
+    private fun deleteOne(position: Int) {
+        val service = RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
+        val call = service.delOneHistory(sharedPreferences.getIntSharedPreferences(ConstantUtils.USER_ID), data[position].recipe_id)
+        call.enqueue(object: Callback<ResponseRecipes>{
+            override fun onFailure(call: Call<ResponseRecipes>, t: Throwable) {
+                Toast.makeText(
+                    mContext,
+                    "Something went wrong...Please try later!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.d("LOGLOGAN", "${t.message}")
+            }
+
+            override fun onResponse(
+                call: Call<ResponseRecipes>,
+                response: Response<ResponseRecipes>
+            ) {
+                if(response.isSuccessful) {
+                    Toast.makeText(mContext, )
+                }
+            }
+        })
     }
 
     inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
