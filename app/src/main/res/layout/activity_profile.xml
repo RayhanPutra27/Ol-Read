@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ECECEC"
-    tools:ignore="UnusedAttribute, ContentDescription , ObsoleteLayoutParam"
-    tools:context=".view.user.ProfileActivity">
+    tools:context=".view.user.ProfileActivity"
+    tools:ignore="UnusedAttribute, ContentDescription , ObsoleteLayoutParam">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -14,136 +14,239 @@
 
     <ImageView
         android:id="@+id/img_back"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="8dp"
         android:layout_width="35dp"
-        android:visibility="gone"
         android:layout_height="35dp"
-        android:src="@drawable/left"/>
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/left"
+        android:visibility="gone" />
 
     <RelativeLayout
-        android:layout_centerInParent="true"
         android:id="@+id/linear_profile"
-        android:paddingHorizontal="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:paddingHorizontal="16dp">
 
 
         <RelativeLayout
             android:id="@+id/view_profile"
-            android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:background="@drawable/custom_background_profile">
+
+            <ImageButton
+                android:id="@+id/bt_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="16dp"
+                android:background="@color/transparent"
+                android:src="@drawable/ic_edit_black_24dp" />
+
+            <ImageButton
+                android:id="@+id/bt_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="16dp"
+                android:background="@color/transparent"
+                android:src="@drawable/ic_close_black_24dp" />
+
+            <ImageButton
+                android:id="@+id/bt_done"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:visibility="gone"
+                android:layout_margin="16dp"
+                android:background="@color/transparent"
+                android:src="@drawable/ic_check_black_24dp" />
+
+            <LinearLayout
+                android:id="@+id/edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bt_edit"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/bg_text_auth"
+                    android:fontFamily="@font/lato_light"
+                    android:gravity="center"
+                    android:hint="Username"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey_1" />
+
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/bg_text_auth"
+                    android:fontFamily="@font/lato_light"
+                    android:gravity="center"
+                    android:hint="Email Address"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey_1" />
+
+                <EditText
+                    android:id="@+id/et_pass_reg"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/bg_text_auth"
+                    android:fontFamily="@font/lato_light"
+                    android:gravity="center"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey_1"
+                    android:visibility="gone" />
+
+                <EditText
+                    android:id="@+id/et_pass_confirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/bg_text_auth"
+                    android:fontFamily="@font/lato_light"
+                    android:gravity="center"
+                    android:hint="Confirm Password"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey_1"
+                    android:visibility="gone" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/name"
-                android:layout_marginTop="74dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chef"
+                android:layout_below="@id/edit"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/lato_bold"
-                android:textSize="24sp"
-                android:layout_centerHorizontal="true"/>
+                android:text="Chef"
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/profesi"
-                android:visibility="gone"
-                android:layout_below="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Master Chef"
+                android:layout_below="@+id/name"
+                android:layout_centerHorizontal="true"
                 android:fontFamily="@font/lato_light"
+                android:text="Master Chef"
                 android:textSize="18sp"
-                android:layout_centerHorizontal="true"/>
+                android:visibility="gone" />
 
             <LinearLayout
-                android:layout_below="@+id/profesi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_below="@+id/profesi"
                 android:layout_marginTop="24dp"
+                android:orientation="horizontal"
                 android:paddingHorizontal="16dp"
                 android:paddingBottom="16dp">
 
                 <LinearLayout
                     android:id="@+id/linear_like"
-                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/like"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Like"
                         android:fontFamily="@font/lato_light"
-                        android:textSize="20sp"/>
+                        android:text="Like"
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/total_like"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0"
+                        android:layout_centerHorizontal="true"
                         android:fontFamily="@font/lato_bold"
-                        android:textSize="24sp"
-                        android:layout_centerHorizontal="true"/>
+                        android:text="0"
+                        android:textSize="24sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/linear_post"
-                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/post"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Post"
                         android:fontFamily="@font/lato_light"
-                        android:textSize="20sp"/>
+                        android:text="Post"
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/total_post"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0"
+                        android:layout_centerHorizontal="true"
                         android:fontFamily="@font/lato_bold"
-                        android:textSize="24sp"
-                        android:layout_centerHorizontal="true"/>
+                        android:text="0"
+                        android:textSize="24sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/linear_archive"
-                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/archive"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Archive"
                         android:fontFamily="@font/lato_light"
-                        android:textSize="20sp"/>
+                        android:text="Archive"
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/total_archive"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0"
+                        android:layout_centerHorizontal="true"
                         android:fontFamily="@font/lato_bold"
-                        android:textSize="24sp"
-                        android:layout_centerHorizontal="true"/>
+                        android:text="0"
+                        android:textSize="24sp" />
 
                 </LinearLayout>
 
@@ -153,59 +256,59 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_profile"
-            android:layout_centerHorizontal="true"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/custom_item_category"/>
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/custom_item_category" />
 
         <TextView
-            android:layout_marginTop="16dp"
-            android:layout_below="@+id/view_profile"
             android:id="@+id/txt_post"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/view_profile"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/lato_bold"
             android:text="Post"
-            android:textSize="24sp"
-            android:fontFamily="@font/lato_bold" />
+            android:textSize="24sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_post"
-            android:layout_marginTop="8dp"
-            android:layout_below="@+id/txt_post"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_post"
+            android:layout_marginTop="8dp" />
 
     </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/addRecipe"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="14dp"
         android:layout_marginEnd="14dp"
-        android:paddingHorizontal="24dp"
+        android:background="@drawable/custom_view_add"
         android:orientation="horizontal"
-        android:paddingVertical="8dp"
-        android:background="@drawable/custom_view_add">
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="8dp">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="Add Recipes"
-            android:textSize="24sp"
-            android:layout_weight="1"
             android:layout_marginEnd="-24dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/lato_bold"
             android:gravity="center"
+            android:text="Add Recipes"
             android:textColor="#FFFFFF"
-            android:fontFamily="@font/lato_bold"/>
+            android:textSize="24sp" />
 
         <ImageView
             android:id="@+id/add_recipe"
-            android:layout_marginStart="-24dp"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:src="@drawable/plus"/>
+            android:layout_marginStart="-24dp"
+            android:src="@drawable/plus" />
 
     </LinearLayout>
 

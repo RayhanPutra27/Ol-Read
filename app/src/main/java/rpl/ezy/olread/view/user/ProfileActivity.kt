@@ -2,6 +2,7 @@ package rpl.ezy.olread.view.user
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -9,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_profile.*
+import okhttp3.MediaType
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,6 +21,7 @@ import rpl.ezy.olread.adapter.RecyclerAcceptedRecipesAdapter
 import rpl.ezy.olread.api.GetDataService
 import rpl.ezy.olread.api.RetrofitClientInstance
 import rpl.ezy.olread.response.ResponseRecipes
+import rpl.ezy.olread.response.ResponseSignup
 import rpl.ezy.olread.response.ResponseUsers
 import rpl.ezy.olread.utils.ConstantUtils.ADMIN
 import rpl.ezy.olread.utils.ConstantUtils.PROFIL
@@ -59,7 +63,50 @@ class ProfileActivity : AppCompatActivity() {
         addRecipe.setOnClickListener {
             startActivity(Intent(this@ProfileActivity, AddRecipesActivity::class.java))
         }
+        edit()
 
+    }
+
+    private fun edit() {
+        val username = RequestBody.create(MediaType.parse("multipart/form-data"), username!!.text.toString())
+        val email = RequestBody.create(MediaType.parse("multipart/form-data"), email!!.text.toString())
+        val user_id = RequestBody.create(MediaType.parse("multipart/form-data"), sharedPreference!!.getIntSharedPreferences(USER_ID).toString())
+        bt_edit.setOnClickListener {
+            bt_done.visibility = View.VISIBLE
+            edit.visibility = View.VISIBLE
+            bt_edit.visibility = View.GONE
+            bt_close.visibility = View.VISIBLE
+        }
+        bt_close.setOnClickListener {
+            bt_done.visibility = View.GONE
+            edit.visibility = View.GONE
+            bt_edit.visibility = View.VISIBLE
+        }
+        bt_done.setOnClickListener {
+            editUser(username, email, user_id)
+        }
+    }
+    private fun editUser(username: RequestBody, email: RequestBody, user_id: RequestBody) {
+        val service = RetrofitClientInstance().getRetrofitInstance().create(GetDataService::class.java)
+        service.editUser(username, email, user_id).enqueue(object: Callback<ResponseSignup>{
+            override fun onFailure(call: Call<ResponseSignup>, t: Throwable) {
+                Toast.makeText(
+                    this@ProfileActivity,
+                    "Something went wrong...Please try later!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.d("LOGLOGAN", "${t.message}")
+            }
+
+            override fun onResponse(
+                call: Call<ResponseSignup>,
+                response: Response<ResponseSignup>
+            ) {
+                if(response.isSuccessful) {
+                    Toast.makeText(this@ProfileActivity, "Berhasil Update!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
     }
 
     private fun getUser(user_id: Int) {
@@ -84,6 +131,8 @@ class ProfileActivity : AppCompatActivity() {
                             .load(data.profil)
                             .into(img_profile)
                         name.text = data.username
+                        username.text = Editable.Factory.getInstance().newEditable(data.username)
+                        email.text = Editable.Factory.getInstance().newEditable(data.email)
                         total_like.text = data.like.toString()
 
                         img_profile.setOnClickListener {
