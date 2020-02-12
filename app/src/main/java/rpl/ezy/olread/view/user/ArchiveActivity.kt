@@ -35,15 +35,7 @@ class ArchiveActivity : AppCompatActivity() {
         setToolbar()
         sharedPref = SharedPreferenceUtils(this@ArchiveActivity)
 
-        GlideApp.with(this@ArchiveActivity)
-            .load(sharedPref!!.getStringSharedPreferences(PROFIL))
-            .into(img_profile)
-
         txt_user.text = sharedPref!!.getStringSharedPreferences(USERNAME)
-
-        img_back.setOnClickListener {
-            finish()
-        }
     }
 
     private fun setToolbar() {

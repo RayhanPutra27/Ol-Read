@@ -41,15 +41,7 @@ class UserActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         sharedPreferences = SharedPreferenceUtils(this@UserActivity)
-        if (sharedPreferences!!.getStringSharedPreferences(ConstantUtils.PROFIL) != "") {
-            GlideApp.with(this@UserActivity)
-                .load(sharedPreferences!!.getStringSharedPreferences(ConstantUtils.PROFIL))
-                .into(img_profile)
-            GlideApp.with(this@UserActivity)
-                .load(sharedPreferences!!.getStringSharedPreferences(ConstantUtils.PROFIL))
-                .into(nav_profile)
-        }
-        txt_user.text = sharedPreferences!!.getStringSharedPreferences(ConstantUtils.USERNAME)
+        setDataUser()
 
         setRecyclerTrends()
         setRecyclerCategory()
@@ -84,6 +76,18 @@ class UserActivity : AppCompatActivity() {
         btn_archive.setOnClickListener {
             startActivity(Intent(this@UserActivity, ArchiveActivity::class.java))
         }
+    }
+
+    private fun setDataUser(){
+        if (sharedPreferences!!.getStringSharedPreferences(ConstantUtils.PROFIL) != "") {
+            GlideApp.with(this@UserActivity)
+                .load(sharedPreferences!!.getStringSharedPreferences(ConstantUtils.PROFIL))
+                .into(img_profile)
+            GlideApp.with(this@UserActivity)
+                .load(sharedPreferences!!.getStringSharedPreferences(ConstantUtils.PROFIL))
+                .into(nav_profile)
+        }
+        txt_user.text = sharedPreferences!!.getStringSharedPreferences(ConstantUtils.USERNAME)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -256,6 +260,7 @@ class UserActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        setDataUser()
         setRecyclerTrends()
         setRecyclerCategory()
         setRecyclerMenu()

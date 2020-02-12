@@ -162,4 +162,11 @@ interface GetDataService {
         @Part("recipe") recipe: RequestBody,
         @Part("kategori") kategori: RequestBody
     ): Call<ResponseAddRecipe>
+
+    @Multipart
+    @POST("users/update/profil")
+    fun editImageProfil(
+        @Part("user_id") user_id: RequestBody,
+        @Part profil: MultipartBody.Part
+    ): Call<ResponseUsers>
 }

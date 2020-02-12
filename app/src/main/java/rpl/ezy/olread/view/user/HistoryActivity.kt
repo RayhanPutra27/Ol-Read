@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_history.*
@@ -39,15 +40,21 @@ class HistoryActivity : AppCompatActivity() {
         loading = ProgressDialog(this@HistoryActivity)
         loading!!.setCancelable(false)
 
-        GlideApp.with(this@HistoryActivity)
-            .load(sharedPref!!.getStringSharedPreferences(ConstantUtils.PROFIL))
-            .into(profile_history)
-
         txt_user.text = sharedPref!!.getStringSharedPreferences(USERNAME)
         setToolbar()
         getHistory()
         deleteAll.setOnClickListener {
-            deleteAllHistory()
+            val builder = AlertDialog.Builder(this@HistoryActivity)
+            builder.setMessage("Anda yakin ingin menghapus semua history?")
+
+            builder.setPositiveButton(android.R.string.yes) { _, _ ->
+                deleteAllHistory()
+            }
+
+            builder.setNegativeButton(android.R.string.no) { dialog, _ ->
+                dialog.dismiss()
+            }
+            builder.show()
         }
     }
 

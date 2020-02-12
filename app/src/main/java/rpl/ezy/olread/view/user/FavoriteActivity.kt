@@ -32,15 +32,7 @@ class FavoriteActivity : AppCompatActivity() {
 
         sharedPref = SharedPreferenceUtils(this@FavoriteActivity)
 
-        GlideApp.with(this@FavoriteActivity)
-            .load(sharedPref!!.getStringSharedPreferences(ConstantUtils.PROFIL))
-            .into(img_profile)
-
         txt_user.text = sharedPref!!.getStringSharedPreferences(ConstantUtils.USERNAME)
-
-        img_back.setOnClickListener {
-            finish()
-        }
         setToolbar()
     }
 

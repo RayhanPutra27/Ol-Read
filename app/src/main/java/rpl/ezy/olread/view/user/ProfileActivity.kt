@@ -90,8 +90,9 @@ class ProfileActivity : AppCompatActivity() {
                         img_profile.setOnClickListener {
                             startActivity(
                                 Intent(this@ProfileActivity, EditProfile::class.java)
-                                    .putExtra(PROFIL,data.profil)
+                                    .putExtra(PROFIL, data.profil)
                                     .putExtra("type", PROFIL)
+                                    .putExtra(USER_ID, data.user_id)
                             )
                         }
                     }

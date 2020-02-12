@@ -60,11 +60,7 @@ class SearchActivity : AppCompatActivity() {
 
         GlideApp.with(this@SearchActivity)
             .load(sharedPref!!.getStringSharedPreferences(ConstantUtils.PROFIL))
-            .into(profile_search)
-
-        img_back.setOnClickListener {
-            finish()
-        }
+            .into(profile_history)
 
     }
 
