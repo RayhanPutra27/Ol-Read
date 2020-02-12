@@ -34,12 +34,12 @@ interface GetDataService {
     @GET("users/{user_id}")
     fun getUser(@Path("user_id") user_id: Int): Call<ResponseUsers>
 
-    @Multipart
-    @POST("/users/update")
+    @FormUrlEncoded
+    @POST("users/update")
     fun editUser(
-        @Part("username") username: RequestBody,
-        @Part("email") email: RequestBody,
-        @Part("user_id") user_id: RequestBody
+        @Field("username") username: String,
+        @Field("email") email: String,
+        @Field("user_id") user_id: Int
     ): Call<ResponseSignup>
 
     // Recipes
