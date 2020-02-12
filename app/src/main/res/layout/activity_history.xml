@@ -44,40 +44,57 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/toolbar"
-                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:paddingHorizontal="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/lato_bold"
-                        android:text="Hallo"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txt_user"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:fontFamily="@font/lato_bold"
-                        android:text="User"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
+                        android:orientation="horizontal">
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/lato_bold"
+                            android:text="Hallo"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txt_user"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/lato_bold"
+                            android:text="User"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_light"
+                        android:text="Ini adalah History masakanmu !"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_light"
-                    android:text="Ini adalah History masakanmu !"
-                    android:textSize="18sp" />
+                <ImageButton
+                    android:id="@+id/deleteAll"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/custom_round_line"
+                    android:layout_marginEnd="9dp"
+                    android:padding="7dp"
+                    android:src="@drawable/ic_delete" />
 
             </LinearLayout>
 
@@ -91,21 +108,10 @@
                 android:paddingHorizontal="16dp"
                 android:paddingTop="16dp">
 
-                <ImageButton
-                    android:id="@+id/deleteAll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/custom_round_line"
-                    android:padding="7dp"
-                    android:src="@drawable/ic_delete" />
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_history"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/deleteAll" />
+                    android:layout_height="wrap_content" />
 
             </RelativeLayout>
 

@@ -17,6 +17,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import rpl.ezy.olread.GlideApp
 import rpl.ezy.olread.R
+import rpl.ezy.olread.adapter.MyRecipeAdapter
 import rpl.ezy.olread.adapter.RecyclerAcceptedRecipesAdapter
 import rpl.ezy.olread.api.GetDataService
 import rpl.ezy.olread.api.RetrofitClientInstance
@@ -177,16 +178,27 @@ class ProfileActivity : AppCompatActivity() {
 
                     total_post.text = "${response.body()!!.data.size}"
 
+                    val mAdapter = MyRecipeAdapter(
+                        this@ProfileActivity,
+                        response.body()!!.data
+                    )
+
+                    mAdapter.interfaceRefresh(object: MyRecipeAdapter.InterfaceRefresh{
+                        override fun void(status: Boolean) {
+                            if(status){
+                                setRecipe(intent.getIntExtra(USER_ID, 0))
+                            }
+                        }
+
+                    })
+
                     recycler_post.apply {
                         layoutManager = LinearLayoutManager(
                             this@ProfileActivity,
                             LinearLayoutManager.HORIZONTAL,
                             false
                         )
-                        adapter = RecyclerAcceptedRecipesAdapter(
-                            this@ProfileActivity,
-                            response.body()!!.data
-                        )
+                        adapter = mAdapter
                     }
                 }
             }
@@ -224,5 +236,12 @@ class ProfileActivity : AppCompatActivity() {
                 total_archive.text = "${response.body()!!.data.size}"
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getUser(intent.getIntExtra(USER_ID, 0))
+        setRecipe(intent.getIntExtra(USER_ID, 0))
+        setArchive(intent.getIntExtra(USER_ID, 0))
     }
 }

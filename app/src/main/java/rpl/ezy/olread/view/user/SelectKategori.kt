@@ -23,7 +23,7 @@ import rpl.ezy.olread.api.RetrofitClientInstance
 import rpl.ezy.olread.response.ResponseCategory
 import rpl.ezy.olread.utils.SharedPreferenceUtils
 
-class SelectKategori (mContext: Context) : Dialog(mContext) {
+class SelectKategori (var mContext: Context) : Dialog(mContext) {
 
     private var sharedPreference: SharedPreferenceUtils? = null
     var mAdapter: KategoriAdapter? = null
@@ -47,10 +47,10 @@ class SelectKategori (mContext: Context) : Dialog(mContext) {
 
         sharedPreference = SharedPreferenceUtils(mContext)
 
-        bt_close_select_kategori.setOnClickListener {
-            dismiss()
-        }
-        
+//        bt_close_select_kategori.setOnClickListener {
+//            dismiss()
+//        }
+
         getKategori(mContext)
     }
 
@@ -94,6 +94,11 @@ class SelectKategori (mContext: Context) : Dialog(mContext) {
         interface InterfaceKategori{
             fun void(kategori: String)
         }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        dismiss()
+    }
 
 }
 

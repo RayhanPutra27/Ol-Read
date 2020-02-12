@@ -151,4 +151,23 @@ interface GetDataService {
 
     @GET("histori/delete/{user_id}")
     fun delHistory(@Path("user_id") user_id: Int): Call<ResponseRecipes>
+
+    @GET("recipes/delete/{recipe_id}")
+    fun delRecipe(@Path("recipe_id") recipe_id: Int): Call<ResponseRecipes>
+
+    @Multipart
+    @POST("recipes/update/image")
+    fun editImageRecipe(
+        @Part("recipe_id") recipe_id: RequestBody,
+        @Part img_url: MultipartBody.Part
+    ): Call<ResponseAddRecipe>
+
+    @Multipart
+    @POST("recipes/update")
+    fun recipeUpdate(
+        @Part("recipe_id") recipe_id: RequestBody,
+        @Part("title") title: RequestBody,
+        @Part("recipe") recipe: RequestBody,
+        @Part("kategori") kategori: RequestBody
+    ): Call<ResponseAddRecipe>
 }
