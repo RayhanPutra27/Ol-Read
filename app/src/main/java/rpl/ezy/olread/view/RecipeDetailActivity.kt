@@ -182,9 +182,12 @@ class RecipeDetailActivity : AppCompatActivity() {
                 } else if (dataRecipe.isAccept == REJECTED){
                     view_button.visibility = View.VISIBLE
                     bt_reject.visibility = View.GONE
+                    bt_confirm.visibility = View.VISIBLE
                     img_archive.visibility = View.GONE
                     img_favorite.visibility = View.GONE
                 } else {
+                    bt_reject.visibility = View.VISIBLE
+                    bt_confirm.visibility = View.VISIBLE
                     view_button.visibility = View.VISIBLE
                     img_archive.visibility = View.GONE
                     img_favorite.visibility = View.GONE
